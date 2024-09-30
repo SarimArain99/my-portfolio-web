@@ -7,57 +7,75 @@ import Link from "next/link";
 function Projects() {
   return (
     <>
-      <p className="text-[#9e9e9e] text-center font-bold text-sm">
-        FEATURED PROJECTS
-      </p>
-      <div className="grid sm:grid-cols-2 grid-cols-1 px-[11vw] gap-10 text-xl py-5">
-        <div className="border-b border-gray-500 overflow-hidden">
-          <Link href="https://main--world-countries-project.netlify.app/">
-            <Image
-              src={country}
-              width={500}
-              height={100}
-              alt="country's Details"
-              className="inline-block shadow-md shadow-gray-400 mb-2 hover:scale-105 duration-500"
-            />
-            <p>Detail About Countries</p>
-          </Link>
-        </div>
-        <div className="border-b border-gray-500 overflow-hidden">
-          <Link href="https://my-dynamic-resume.vercel.app/">
-            <Image
-              src={DResume}
-              width={500}
-              height={100}
-              alt="country's Details"
-              className="inline-block shadow-md shadow-gray-400 mb-2 hover:scale-105 duration-500"
-            />
-            <p>Generate Resume Dynamically</p>
-          </Link>
-        </div>
-        <div className="border-b border-gray-500 overflow-hidden">
-          <Link href="https://my-static-resume.vercel.app/">
-            <Image
-              src={SResume}
-              width={500}
-              height={100}
-              alt="country's Details"
-              className="inline-block shadow-md shadow-gray-400 mb-2 hover:scale-105 duration-500"
-            />
-            <p>My Resume</p>
-          </Link>
-        </div>
-        <div className="border-b border-gray-500 overflow-hidden">
-          <Link href="https://inventory-management-system-proj.netlify.app/">
-            <Image
-              src={IMS}
-              width={500}
-              height={100}
-              alt="Inventory Management System"
-              className="inline-block shadow-md shadow-gray-400 mb-2 hover:scale-105 duration-500"
-            />
-            <p>Inventory Management System</p>
-          </Link>
+      <div className="py-12 bg-[#F4F4F4]">
+        <p className="text-[#9e9e9e] text-center font-bold text-sm tracking-wide">
+          FEATURED PROJECTS
+        </p>
+
+        <div className="grid sm:grid-cols-2 grid-cols-1 px-[11vw] gap-10 py-10">
+          {/* Project 1 */}
+          <div className="group border-b border-gray-300 overflow-hidden transition duration-300 ease-in-out hover:border-blue-600">
+            <Link href="/countriesDetails">
+              <Image
+                src={country}
+                width={500}
+                height={300}
+                alt="Country Details"
+                className="inline-block shadow-md shadow-gray-400 mb-3 rounded-lg group-hover:scale-105 transition duration-500 ease-in-out"
+              />
+              <p className="text-center font-semibold text-gray-700 group-hover:text-blue-600 transition duration-300">
+                Detail About Countries
+              </p>
+            </Link>
+          </div>
+
+          {/* Project 2 */}
+          <div className="group border-b border-gray-300 overflow-hidden transition duration-300 ease-in-out hover:border-blue-600">
+            <Link href="/dynamicResume">
+              <Image
+                src={DResume}
+                width={500}
+                height={300}
+                alt="Dynamic Resume"
+                className="inline-block shadow-md shadow-gray-400 mb-3 rounded-lg group-hover:scale-105 transition duration-500 ease-in-out"
+              />
+              <p className="text-center font-semibold text-gray-700 group-hover:text-blue-600 transition duration-300">
+                Generate Resume Dynamically
+              </p>
+            </Link>
+          </div>
+
+          {/* Project 3 */}
+          <div className="group border-b border-gray-300 overflow-hidden transition duration-300 ease-in-out hover:border-blue-600">
+            <Link href="/staticResume">
+              <Image
+                src={SResume}
+                width={500}
+                height={300}
+                alt="Static Resume"
+                className="inline-block shadow-md shadow-gray-400 mb-3 rounded-lg group-hover:scale-105 transition duration-500 ease-in-out"
+              />
+              <p className="text-center font-semibold text-gray-700 group-hover:text-blue-600 transition duration-300">
+                My Resume
+              </p>
+            </Link>
+          </div>
+
+          {/* Project 4 */}
+          <div className="group border-b border-gray-300 overflow-hidden transition duration-300 ease-in-out hover:border-blue-600">
+            <Link href="/IMS">
+              <Image
+                src={IMS}
+                width={500}
+                height={300}
+                alt="Inventory Management System"
+                className="inline-block shadow-md shadow-gray-400 mb-3 rounded-lg group-hover:scale-105 transition duration-500 ease-in-out"
+              />
+              <p className="text-center font-semibold text-gray-700 group-hover:text-blue-600 transition duration-300">
+                Inventory Management System
+              </p>
+            </Link>
+          </div>
         </div>
       </div>
     </>
