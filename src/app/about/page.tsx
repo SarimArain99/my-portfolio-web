@@ -7,8 +7,8 @@ function About() {
   return (
     <div className="py-24">
       <div className="h-40 bg-gradient-to-r from-[#1a1d1f] to-[#202426] text-white text-center lg:text-3xl md:text-2xl sm:text-lg text-base py-8 md:px-28 sm:px-4 font-serif leading-relaxed shadow-lg">
-        I'm a professional Front-End Developer with expertise in HTML, CSS,
-        JavaScript, TypeScript, Tailwind CSS, Node.js, React.js, and Next.js.
+        I'm a professional Front-End Developer with expertise in HTML&apos; CSS&apos;
+        JavaScript&apos; TypeScript&apos; Tailwind CSS&apos; Node.js&apos; React.js&apos; and Next.js.
       </div>
 
       <div className="flex py-9 items-center justify-center">
