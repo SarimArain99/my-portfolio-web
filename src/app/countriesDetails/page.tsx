@@ -3,6 +3,7 @@ import country from "../public/images/Country.png";
 import Image from "next/image";
 function countriesDetails() {
   return (
+    <div className="flex justify-center">
     <div className="sm:mx-8 mx-2 py-10 max-w-3xl relative top-28 bg-white shadow-2xl rounded-2xl overflow-hidden mb-20">
       <Image
         src={country}
@@ -91,6 +92,7 @@ function countriesDetails() {
           Explore the Project
         </Link>
       </div>
+    </div>
     </div>
   );
 }
