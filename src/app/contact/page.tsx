@@ -7,6 +7,7 @@ function contact() {
           Full Name
         </label>
         <input
+        required
           type="text"
           id="name"
           name="fullName"
@@ -19,6 +20,7 @@ function contact() {
           Email
         </label>
         <input
+        required
           type="email"
           id="email"
           name="email"
@@ -31,6 +33,7 @@ function contact() {
           Subject
         </label>
         <textarea
+        required
         name="subject"
           id="subject"
           placeholder="Write Subject"
@@ -42,6 +45,7 @@ function contact() {
           Message
         </label>
         <textarea
+        required
         name="message"
           id="message"
           placeholder="Write Message"
