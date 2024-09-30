@@ -87,7 +87,7 @@ function countriesDetails() {
 
         <Link
           href="https://main--world-countries-project.netlify.app/"
-          className=" text-center mt-6 block w-max mx-10 text-lg sm:text-xl lg:text-2xl text-blue-600 font-bold hover:text-blue-800 transition duration-300 ease-in-out"
+          className="mt-6 block w-max mx-auto text-xl xl:text-2xl text-blue-600 font-bold hover:text-blue-800 transition duration-300 ease-in-out"
         >
           Explore the Project
         </Link>
