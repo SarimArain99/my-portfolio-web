@@ -5,7 +5,7 @@ import { useState } from "react";
 
 function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  let pathName = usePathname();
+  const pathName = usePathname();
   function clickHandler() {
     setIsOpen(false)
   }
@@ -87,7 +87,7 @@ function Navigation() {
           className="relative inline-block w-48 text-center py-2 font-bold text-white bg-black border-2 h-12 border-black group overflow-hidden rounded-3xl"
         >
           <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
-            Let's Work Together
+            Let&apos;s Work Together
           </span>
           <span className="absolute inset-0 bg-white text-black transition-all duration-300 scale-y-0 group-hover:scale-y-100 origin-bottom"></span>
         </Link>
@@ -192,7 +192,7 @@ function Navigation() {
               href="contact"
               className="block p-3 text-center py-2 font-bold text-white bg-black border-2 h-12 border-black group overflow-hidden rounded-3xl"
             >
-              Let's Work Together
+              Let&apos;s Work Together
             </Link>
           </div>
         </div>
