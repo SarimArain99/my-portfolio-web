@@ -8,7 +8,7 @@ function countriesDetails() {
       <Image
         src={country}
         alt="Country Details"
-        className="w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80 object-cover rounded-t-lg border-b border-gray-200"
+        className="w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80 object-contain rounded-t-lg border-b border-gray-200"
       />
       <div className="px-4 sm:px-6 py-8">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 text-center text-gray-800 tracking-wide">

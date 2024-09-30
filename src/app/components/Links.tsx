@@ -22,7 +22,7 @@ function Links() {
       </div>
 
       <div className="flex flex-col text-left">
-        <p className="text-gray-500 text-lg font-medium mb-6">Find Me At</p>
+        <p className="text-gray-500 text-lg font-medium">Find Me At</p>
         <div className="space-y-4">
           {[
             {

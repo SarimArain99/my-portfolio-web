@@ -8,7 +8,7 @@ function page() {
         <Image
           src={IMS}
           alt="Inventory Management System"
-          className="w-full h-64 object-cover rounded-t-lg border-b border-gray-200"
+          className="w-full h-64 object-contain rounded-t-lg border-b border-gray-200"
         />
         <div className="px-6 py-8">
           <h1 className="text-4xl font-extrabold mb-6 text-center text-gray-800 tracking-wide">

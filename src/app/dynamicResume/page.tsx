@@ -9,7 +9,7 @@ function page() {
         <Image
           src={DResume}
           alt="Dynamic Resume Generator"
-          className="w-full h-64 xl:h-80 object-cover rounded-t-lg border-b border-gray-200"
+          className="w-full h-64 xl:h-80 object-contain rounded-t-lg border-b border-gray-200"
         />
         <div className="px-6 py-8 xl:px-12 xl:py-10">
           <h1 className="text-4xl xl:text-5xl font-extrabold mb-6 text-center text-gray-800 tracking-wide">
