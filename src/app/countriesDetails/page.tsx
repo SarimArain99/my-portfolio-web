@@ -35,7 +35,7 @@ function countriesDetails() {
               Capitals
             </h2>
             <p className="text-gray-600 leading-relaxed">
-              Each country’s capital is highlighted for quick reference.
+              Each country&apos;s capital is highlighted for quick reference.
             </p>
           </div>
 
@@ -87,7 +87,7 @@ function countriesDetails() {
 
         <Link
           href="https://main--world-countries-project.netlify.app/"
-          className="mt-6 block w-max mx-auto text-lg sm:text-xl lg:text-2xl text-blue-600 font-bold hover:text-blue-800 transition duration-300 ease-in-out"
+          className=" text-center mt-6 block w-max mx-10 text-lg sm:text-xl lg:text-2xl text-blue-600 font-bold hover:text-blue-800 transition duration-300 ease-in-out"
         >
           Explore the Project
         </Link>
