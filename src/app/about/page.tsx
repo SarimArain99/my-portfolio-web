@@ -13,13 +13,13 @@ function About() {
 
       <div className="flex py-9 items-center justify-center">
         <div className="flex py-10 items-center justify-center relative">
-          <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full overflow-hidden relative -z-30 -mr-10 border border-gray-400">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full overflow-hidden relative -z-30 sm:-mr-10 -mr-5 border border-gray-400">
             <Image src={sa} alt="Sarim" className="object-bottom" />
           </div>
           <div className="w-40 h-40 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-80 lg:h-80 rounded-full overflow-hidden relative -z-20 border border-gray-400">
             <Image src={sarim3} alt="Sarim" className="object-cover" />
           </div>
-          <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full overflow-hidden relative -z-30 -ml-10 border border-gray-400">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full overflow-hidden relative -z-30 sm:-ml-10 -ml-5 border border-gray-400">
             <Image src={sarim2} alt="Sarim" className="object-cover" />
           </div>
         </div>

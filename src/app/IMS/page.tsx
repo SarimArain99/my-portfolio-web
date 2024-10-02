@@ -3,15 +3,15 @@ import IMS from "../public/images/IMS.png";
 import Image from "next/image";
 function page() {
   return (
-    <div className="flex justify-center">
-      <div className="sm:mx-8 mx-2 py-10 max-w-3xl relative top-28 bg-white shadow-2xl rounded-2xl overflow-hidden mb-20">
+    <div className="flex justify-center mx-3">
+      <div className="mt-12 overflow-hidden">
         <Image
           src={IMS}
           alt="Inventory Management System"
-          className="w-full h-64 object-contain rounded-t-lg border-b border-gray-200"
+          className="w-full object-contain rounded-t-lg mt-14"
         />
         <div className="px-6 py-8">
-          <h1 className="text-4xl font-extrabold mb-6 text-center text-gray-800 tracking-wide">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 sm: mt-10 text-center text-gray-800 tracking-wide">
             Inventory Management System Overview
           </h1>
           <p className="text-lg mb-6 text-gray-700 leading-relaxed">

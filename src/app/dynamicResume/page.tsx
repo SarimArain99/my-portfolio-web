@@ -4,15 +4,15 @@ import DResume from "../public/images/Dynamic Resume.png";
 
 function page() {
   return (
-    <div className="flex justify-center">
-      <div className="sm:mx-8 mx-2 py-10 max-w-3xl xl:max-w-5xl relative top-28 bg-white shadow-2xl rounded-2xl overflow-hidden mb-20">
+    <div className="flex justify-center mx-3">
+      <div className="mt-12 overflow-hidden">
         <Image
           src={DResume}
           alt="Dynamic Resume Generator"
-          className="w-full h-64 xl:h-80 object-contain rounded-t-lg border-b border-gray-200"
+          className="w-full object-contain rounded-t-lg mt-14"
         />
         <div className="px-6 py-8 xl:px-12 xl:py-10">
-          <h1 className="text-4xl xl:text-5xl font-extrabold mb-6 text-center text-gray-800 tracking-wide">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 sm: mt-10 text-center text-gray-800 tracking-wide">
             Dynamic Resume Generator Overview
           </h1>
           <p className="text-lg xl:text-xl mb-6 text-gray-700 leading-relaxed">
