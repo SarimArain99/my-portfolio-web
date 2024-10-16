@@ -67,7 +67,7 @@ function FAQs() {
           Where can I find the contact form on your website?
         </h3>
         <p className="p-3 rounded-lg bg-white">
-          The contact form is available in the "Let&apos;s Work Together"
+          The contact form is available in the &quot;Let&apos;s Work Together&quot;
           section. Simply fill in the required information, and we&apos;ll
           connect with you as soon as possible. You can also connect with me on
           LinkedIn and Instagram.

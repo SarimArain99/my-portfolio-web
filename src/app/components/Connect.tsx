@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 function Connect() {
     return (
         <div className="bg-[#202426] h-36 text-center text-2xl py-5">
