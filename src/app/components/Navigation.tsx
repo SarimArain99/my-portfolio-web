@@ -17,7 +17,7 @@ function Navigation() {
           href="/"
           className="sm:text-5xl text-3xl font-bold ml-2 text-[#202426]"
         >
-          M.Sarim <span className="text-[#FF5A13] ">.</span>
+          M.Sarim<span className="text-[#FF5A13] ">.</span>
         </Link>
       </div>
       <div className="space-x-3 text-2xl font-[20px] lg:flex hidden">
@@ -31,7 +31,7 @@ function Navigation() {
           <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-black transition-all duration-300 group-hover:w-full"></span>
         </Link>
         <Link
-          href="about"
+          href="/about"
           className={`group relative ${
             pathName === "/about" ? "border-b border-black" : ""
           }`}
@@ -40,12 +40,12 @@ function Navigation() {
           <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-black transition-all duration-300 group-hover:w-full"></span>
         </Link>
         <Link
-          href="contact"
+          href="/FAQs"
           className={`group relative ${
-            pathName === "/contact" ? "border-b border-black" : ""
+            pathName === "/FAQs" ? "border-b border-black" : ""
           }`}
         >
-          Contact
+          FAQs
           <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-black transition-all duration-300 group-hover:w-full"></span>
         </Link>
       </div>
@@ -83,7 +83,7 @@ function Navigation() {
           </svg>
         </Link>
         <Link
-          href="contact"
+          href="/contact"
           className="relative inline-block w-48 text-center py-2 font-bold text-white bg-black border-2 h-12 border-black group overflow-hidden rounded-3xl"
         >
           <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
@@ -138,12 +138,12 @@ function Navigation() {
           </Link>
           <Link
           onClick={clickHandler}
-            href="contact"
+            href="FAQs"
             className={` ${
               pathName === "/contact" ? "text-black font-bold underline" : "text-gray-700"
             }`}
           >
-            Contact
+            FAQs
           </Link>
           <div className="space-y-6">
             <div className="flex justify-center space-x-5">

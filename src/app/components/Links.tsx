@@ -2,28 +2,33 @@ import Link from "next/link";
 
 function Links() {
   return (
-    <div className="flex px-10 py-8 gap-x-16 justify-center">
+    <div className="flex px-10 py-8 gap-x-20 justify-center">
       <div className="flex flex-col text-center">
-        <p className="text-gray-500 text-lg font-medium mb-6">Pages</p>
-        <div className="space-y-4">
-          <Link href="/about" className="relative group">
+        <p className="text-gray-500 text-lg font-medium mb-3">Pages</p>
+        <div>
+          <Link href="/" className="relative group">
             <span className="text-lg font-semibold text-black group-hover:text-blue-600 transition duration-300">
               Work
             </span>
             <div className="w-full h-[2px] bg-black group-hover:bg-blue-600 mt-1 transition-all duration-300"></div>
           </Link>
-          <Link href="/contact" className="relative group">
+          <Link href="/about" className="relative group">
             <span className="text-lg font-semibold text-black group-hover:text-blue-600 transition duration-300">
-              Connect
+              About
+            </span>
+            <div className="w-full h-[2px] bg-black group-hover:bg-blue-600 mt-1 transition-all duration-300"></div>
+          </Link>
+          <Link href="/FAQs" className="relative group">
+            <span className="text-lg font-semibold text-black group-hover:text-blue-600 transition duration-300">
+              FAQs
             </span>
             <div className="w-full h-[2px] bg-black group-hover:bg-blue-600 mt-1 transition-all duration-300"></div>
           </Link>
         </div>
       </div>
-
       <div className="flex flex-col text-left">
-        <p className="text-gray-500 text-lg font-medium">Find Me At</p>
-        <div className="space-y-4">
+        <p className="text-gray-500 text-lg font-medium mb-3">Find Me At</p>
+        <div>
           {[
             {
               name: "Instagram",

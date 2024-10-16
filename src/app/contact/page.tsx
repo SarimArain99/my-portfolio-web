@@ -1,13 +1,23 @@
-function contact() {
+import React from "react";
+
+function Contact() {
   return (
-    <form className="flex flex-col justify-center relative top-28 py-10 border border-black sm:mx-10 mx-5 sm:px-10 px-2 bg-gray-50 rounded-lg shadow-xl mb-20" action="https://api.web3forms.com/submit" method="POST">
+    <form
+      className="flex flex-col justify-center relative top-28 py-10 border border-black sm:mx-10 mx-5 sm:px-10 px-2 bg-gray-50 rounded-lg shadow-xl mb-20"
+      action="https://api.web3forms.com/submit"
+      method="POST"
+    >
       <div className="flex flex-col mb-6">
-      <input type="hidden" name="access_key" value="97b9413e-2ea8-4b21-921b-f87d710755d6"/>
+        <input
+          type="hidden"
+          name="access_key"
+          value="97b9413e-2ea8-4b21-921b-f87d710755d6"
+        />
         <label htmlFor="name" className="text-lg font-medium mb-2">
           Full Name
         </label>
         <input
-        required
+          required
           type="text"
           id="name"
           name="fullName"
@@ -20,7 +30,7 @@ function contact() {
           Email
         </label>
         <input
-        required
+          required
           type="email"
           id="email"
           name="email"
@@ -33,8 +43,8 @@ function contact() {
           Subject
         </label>
         <textarea
-        required
-        name="subject"
+          required
+          name="subject"
           id="subject"
           placeholder="Write Subject"
           className="p-3 border rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 duration-500 outline-none"
@@ -45,8 +55,8 @@ function contact() {
           Message
         </label>
         <textarea
-        required
-        name="message"
+          required
+          name="message"
           id="message"
           placeholder="Write Message"
           className="p-3 border rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 duration-500 outline-none"
@@ -59,4 +69,4 @@ function contact() {
   );
 }
 
-export default contact;
+export default Contact;
