@@ -3,7 +3,7 @@ import React from "react";
 function Contact() {
   return (
     <form
-      className="flex flex-col justify-center relative top-28 py-10 border border-black sm:mx-10 mx-5 sm:px-10 px-2 bg-gray-50 rounded-lg shadow-xl mb-20"
+      className="flex flex-col justify-center relative top-28 py-10 border sm:mx-10 mx-5 sm:px-10 px-2 bg-gray-50 rounded-lg shadow-xl mb-20"
       action="https://api.web3forms.com/submit"
       method="POST"
     >
@@ -62,7 +62,7 @@ function Contact() {
           className="p-3 border rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 duration-500 outline-none"
         ></textarea>
       </div>
-      <button className="bg-orange-500 text-white font-semibold w-32 h-12 rounded-lg shadow-md hover:bg-orange-400 transition-all duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 ">
+      <button className="bg-black text-white font-semibold w-32 h-12 rounded-lg shadow-md hover:bg-orange-400 transition-all duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 ">
         Submit
       </button>
     </form>
