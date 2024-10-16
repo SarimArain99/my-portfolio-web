@@ -16,7 +16,7 @@ function Skills() {
   );
 
   return (
-    <div className="overflow-hidden lg:h-36 md:h-20 sm:h-18 h-16 bg-[#202426] sm:p-4  max-w-[100%] mx-auto my-6 shadow-lg text-white text-center cursor-default">
+    <div className="overflow-hidden lg:h-36 md:h-20 sm:h-18 h-16 bg-[#202426] sm:p-4 max-w-[100%] mx-auto mt-6 shadow-lg text-white text-center cursor-default">
       <p className="lg:text-lg md:text-sm sm:text-sm text-xs text-[#757575] sm:pt-1 pt-2">
         MY SKILLS
       </p>

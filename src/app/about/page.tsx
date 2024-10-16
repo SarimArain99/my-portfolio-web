@@ -24,7 +24,6 @@ function About() {
           </div>
         </div>
       </div>
-
       <p className="lg:text-xl md:text-lg sm:text-base text-sm text-center lg:px-48 md:px-32 sm:px-16 px-8 font-semibold leading-relaxed py-10">
         I&apos;m a passionate front-end developer, skilled in building responsive and
         dynamic user interfaces. I specialize in crafting seamless user

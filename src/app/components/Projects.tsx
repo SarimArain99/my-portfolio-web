@@ -7,12 +7,12 @@ import Link from "next/link";
 function Projects() {
   return (
     <>
-      <div className="py-12 bg-[#F4F4F4]">
+      <div className="sm:pt-12 pt-5 bg-[#F4F4F4]">
         <p className="text-[#9e9e9e] text-center font-bold text-sm tracking-wide">
           FEATURED PROJECTS
         </p>
 
-        <div className="grid sm:grid-cols-2 grid-cols-1 px-[11vw] gap-10 py-10">
+        <div className="grid sm:grid-cols-2 grid-cols-1 px-[11vw] gap-10 pt-10">
           {/* Project 1 */}
           <div className="group border-b border-gray-300 overflow-hidden transition duration-300 ease-in-out hover:border-blue-600">
             <Link href="/countriesDetails">
