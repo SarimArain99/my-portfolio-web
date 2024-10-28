@@ -1,5 +1,4 @@
 import Link from "next/link";
-import country from "../public/images/Country.png";
 import Image from "next/image";
 function countriesDetails() {
   return (
