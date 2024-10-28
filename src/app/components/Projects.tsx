@@ -8,7 +8,7 @@ function Projects() {
           FEATURED PROJECTS
         </p>
 
-        <div className="grid sm:grid-cols-2 grid-cols-1 px-[11vw] gap-10 pt-10">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-[11vw] gap-14 pt-10">
           <div className="group border-b border-gray-300 overflow-hidden transition duration-300 ease-in-out hover:border-blue-600">
             <Link href="/staticResume">
               <Image
@@ -96,6 +96,7 @@ function Projects() {
             </Link>
           </div>
         </div>
+        <div className="h-[1px] bg-black mt-5 mx-20"></div>
       </div>
     </>
   );
