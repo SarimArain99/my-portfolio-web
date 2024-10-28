@@ -7,7 +7,7 @@ function page() {
     <div className="flex justify-center mx-3">
       <div className="mt-12 overflow-hidden">
         <Image
-          src="DResume.jpg"
+          src="/DResume.jpg"
           alt="Dynamic Resume Generator"
           className="w-full object-contain rounded-t-lg mt-14"
           width={1000}
