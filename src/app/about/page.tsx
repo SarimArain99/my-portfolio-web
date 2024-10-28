@@ -1,7 +1,4 @@
 import Image from "next/image";
-import sa from "../public/sa.jpg";
-import sarim2 from "../public/sarim2.jpg";
-import sarim3 from "../public/sarim3.jpg";
 import Skills from "../components/Skills";
 function About() {
   return (
@@ -14,13 +11,13 @@ function About() {
       <div className="flex py-9 items-center justify-center">
         <div className="flex py-10 items-center justify-center relative">
           <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full overflow-hidden relative -z-30 sm:-mr-10 -mr-5 border border-gray-400">
-            <Image src={sa} alt="Sarim" className="object-bottom" />
+            <Image src="/sa.jpg" alt="Sarim" className="object-bottom" width={1000} height={1000} />
           </div>
           <div className="w-40 h-40 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-80 lg:h-80 rounded-full overflow-hidden relative -z-20 border border-gray-400">
-            <Image src={sarim3} alt="Sarim" className="object-cover" />
+            <Image src="/sarim3.jpg" alt="Sarim" className="object-cover"  width={1000} height={1000}/>
           </div>
           <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full overflow-hidden relative -z-30 sm:-ml-10 -ml-5 border border-gray-400">
-            <Image src={sarim2} alt="Sarim" className="object-cover" />
+            <Image src="/sarim2.jpg" alt="Sarim" className="object-cover" width={1000} height={1000}/>
           </div>
         </div>
       </div>

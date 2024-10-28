@@ -1,14 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import SResume from "../public/images/Static Resume.png";
 function page() {
   return (
     <div className="flex justify-center mx-3">
       <div className="mt-12 overflow-hidden">
         <Image
-          src={SResume}
+          src="/SResume.png"
           alt="Static Resume"
           className="w-full object-contain rounded-t-lg mt-14"
+          width={1000}
+          height={1000}
         />
         <div className="px-6 py-8 xl:px-12 xl:py-10">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 sm: mt-10 text-center text-gray-800 tracking-wide">

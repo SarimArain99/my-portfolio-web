@@ -1,8 +1,4 @@
 import Image from "next/image";
-import country from "../public/images/Country.png";
-import DResume from "../public/images/Dynamic Resume.png";
-import SResume from "../public/images/Static Resume.png";
-import IMS from "../public/images/IMS.png";
 import Link from "next/link";
 function Projects() {
   return (
@@ -16,7 +12,7 @@ function Projects() {
           <div className="group border-b border-gray-300 overflow-hidden transition duration-300 ease-in-out hover:border-blue-600">
             <Link href="/staticResume">
               <Image
-                src={SResume}
+                src="/SResume.jpg"
                 width={500}
                 height={300}
                 alt="Static Resume"
@@ -31,7 +27,7 @@ function Projects() {
           <div className="group border-b border-gray-300 overflow-hidden transition duration-300 ease-in-out hover:border-blue-600">
             <Link href="/dynamicResume">
               <Image
-                src={DResume}
+                src="/DResume.png"
                 width={500}
                 height={300}
                 alt="Dynamic Resume"
@@ -46,7 +42,7 @@ function Projects() {
           <div className="group border-b border-gray-300 overflow-hidden transition duration-300 ease-in-out hover:border-blue-600">
             <Link href="/countriesDetails">
               <Image
-                src={country}
+                src="/Country.png"
                 width={500}
                 height={300}
                 alt="Country Details"
@@ -57,13 +53,10 @@ function Projects() {
               </p>
             </Link>
           </div>
-
-          {/* Project 2 */}
-
           <div className="group border-b border-gray-300 overflow-hidden transition duration-300 ease-in-out hover:border-blue-600">
             <Link href="/IMS">
               <Image
-                src={IMS}
+                src="/IMS.png"
                 width={500}
                 height={300}
                 alt="Inventory Management System"
@@ -71,6 +64,34 @@ function Projects() {
               />
               <p className="text-center font-semibold text-gray-700 group-hover:text-blue-600 transition duration-300">
                 Inventory Management System
+              </p>
+            </Link>
+          </div>
+          <div className="group border-b border-gray-300 overflow-hidden transition duration-300 ease-in-out hover:border-blue-600">
+            <Link href="https://landing-page-class-assignment.vercel.app/">
+              <Image
+                src="/landing.jpg"
+                width={500}
+                height={300}
+                alt="Landing Page"
+                className="inline-block shadow-md shadow-gray-400 mb-3 rounded-lg group-hover:scale-105 transition duration-500 ease-in-out"
+              />
+              <p className="text-center font-semibold text-gray-700 group-hover:text-blue-600 transition duration-300">
+                Landing Page
+              </p>
+            </Link>
+          </div>
+          <div className="group border-b border-gray-300 overflow-hidden transition duration-300 ease-in-out hover:border-blue-600">
+            <Link href="https://governor-initiative-web-clone.vercel.app/">
+              <Image
+                src="/GIAIC.png"
+                width={500}
+                height={300}
+                alt="Inventory Management System"
+                className="inline-block shadow-md shadow-gray-400 mb-3 rounded-lg group-hover:scale-105 transition duration-500 ease-in-out"
+              />
+              <p className="text-center font-semibold text-gray-700 group-hover:text-blue-600 transition duration-300">
+                GIAIC Website Clone
               </p>
             </Link>
           </div>
