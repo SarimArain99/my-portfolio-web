@@ -65,7 +65,7 @@ function About() {
       <div className="text-center py-10 px-6 mx-10  p-6">
         <p className="text-2xl sm:text-3xl font-serif italic leading-relaxed text-[#202426]">
           <span className="text-5xl font-extrabold text-gray-400">“</span>
-          Programming isn't about what you know; it's about what you can figure
+          Programming isn&apos;t about what you know; it&apos;s about what you can figure
           out.
           <span className="text-5xl font-extrabold text-gray-400">”</span>
         </p>
