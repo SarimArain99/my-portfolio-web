@@ -21,12 +21,12 @@ const projects: projects[] = [
     hostedLink: "https://portfoliosarim.vercel.app/",
   },
   {
-    image: "/borcelle.png",
-    title: "Borcelle Car Rental",
+    image: "/fashionfinds.png",
+    title: "Fashion Finds E-Commerce Platform",
     description:
-      "A comprehensive car rental platform built to streamline the booking process for users. It features an intuitive navigation system, detailed car listings with filters for preferences like model and price range, and a sleek UI designed to deliver an unparalleled user experience. This project highlights my ability to merge functionality with aesthetics, making it a robust and user-friendly solution for the car rental industry.",
-    githubLink: "https://github.com/SarimArain99/BORCELLE-CAR-RENTAL.git",
-    hostedLink: "https://borcelle-car-rental.vercel.app/",
+      "A modern e-commerce platform designed to provide a seamless shopping experience for users. It features a user-friendly interface, product categories, filters, and a secure checkout process. This project showcases my ability to create dynamic web applications with a focus on functionality, aesthetics, and user engagement.",
+    githubLink: "https://github.com/SarimArain99/fashion-finds.git",
+    hostedLink: "https://fashion-finds-store.vercel.app/",
   },
   {
     image: "/codeAndBeyond.png",
@@ -35,6 +35,14 @@ const projects: projects[] = [
       "An engaging blog platform tailored for tech enthusiasts, developers, and learners. This website features a modern layout with categories for articles, tutorials, and news. It includes dynamic content rendering, search functionality, and an intuitive design that makes browsing articles a delightful experience. This project showcases my expertise in creating content-driven web solutions with a strong focus on user engagement.",
     githubLink: "https://github.com/SarimArain99/Code-and-Beyond.git",
     hostedLink: "https://code-and-beyond.vercel.app/",
+  },
+  {
+    image: "/borcelle.png",
+    title: "Borcelle Car Rental",
+    description:
+      "A comprehensive car rental platform built to streamline the booking process for users. It features an intuitive navigation system, detailed car listings with filters for preferences like model and price range, and a sleek UI designed to deliver an unparalleled user experience. This project highlights my ability to merge functionality with aesthetics, making it a robust and user-friendly solution for the car rental industry.",
+    githubLink: "https://github.com/SarimArain99/BORCELLE-CAR-RENTAL.git",
+    hostedLink: "https://borcelle-car-rental.vercel.app/",
   },
   {
     image: "/Country.png",
