@@ -1,34 +1,34 @@
+import Image from "next/image";
+
 function Skills() {
-  const rightArror = (
-    <svg
-      className="h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 lg:h-10 lg:w-10 "
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M17 8l4 4m0 0l-4 4m4-4H3"
-      />
-    </svg>
-  );
+  const skills = [
+    { name: "Tailwind CSS", img: "/tailwind.png" },
+    { name: "Next.js", img: "/next.png" },
+    { name: "React.js", img: "/react.png" },
+    { name: "TypeScript", img: "/ts.png" },
+    { name: "JavaScript", img: "/js.png" },
+    { name: "CSS", img: "/css.png" },
+    { name: "HTML", img: "/html.png" },
+  ];
 
   return (
-    <div className="overflow-hidden lg:h-36 md:h-20 sm:h-18 h-16 bg-[#202426] sm:p-4 max-w-[100%] mx-auto mt-6 shadow-lg text-white text-center cursor-default">
+    <div className="overflow-hidden h-auto bg-[#202426] sm:p-4 max-w-[100%] mx-auto my-6 shadow-lg text-white text-center cursor-default">
       <p className="lg:text-lg md:text-sm sm:text-sm text-xs text-[#757575] sm:pt-1 pt-2">
         MY SKILLS
       </p>
-      <div className="lg:text-3xl md:text-lg sm:text-sm text-xs font-semibold text-indigo-300 dark:text-white whitespace-nowrap animate-scroll flex justify-center items-center">
-        &nbsp; &nbsp; <span className="mr-2">{rightArror}</span>NEXT.Js &nbsp;
-        &nbsp; <span className="mr-2">{rightArror}</span>REACT.Js &nbsp;{" "}
-        <span className="mr-2">{rightArror}</span>NODE.Js &nbsp;{" "}
-        <span className="mr-2">{rightArror}</span>TAILWIND CSS &nbsp;{" "}
-        <span className="mr-2">{rightArror}</span>TypeScript &nbsp;{" "}
-        <span className="mr-2">{rightArror}</span>JavaScript &nbsp;{" "}
-        <span className="mr-2">{rightArror}</span>CSS &nbsp;{" "}
-        <span className="mr-2">{rightArror}</span>HTML
+      <div className="lg:text-3xl md:text-lg sm:text-sm text-xs font-semibold text-indigo-300 dark:text-white whitespace-nowrap animate-scroll flex justify-center items-center space-x-10">
+        {skills.map((skill, index) => (
+          <div key={index} className="flex flex-col items-center py-2">
+            <Image
+              width={1000}
+              height={1000}
+              src={skill.img}
+              alt={skill.name}
+              className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 mb-2 object-contain"
+            />
+            <span className="text-center">{skill.name}</span>
+          </div>
+        ))}
       </div>
     </div>
   );

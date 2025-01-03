@@ -8,7 +8,7 @@ function Footer() {
         <Links/>
         <div>
             <div className="h-[1px] sm:mt-5 mt-3 sm:mx-16 mx-6 bg-black text-black"></div>
-            <p className="sm:mx-20 mx-10 text-[#757575] text-sm cursor-default">© M.SARIM. ALL RIGHTS RESERVED</p>
+            <p className="sm:mx-20 mx-10 text-[#757575] text-sm cursor-default">2024 - {new Date().getFullYear()} © M.SARIM. ALL RIGHTS RESERVED</p>
         </div>
         </div>
     );
