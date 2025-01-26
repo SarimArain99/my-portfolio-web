@@ -53,6 +53,14 @@ const projects: projects[] = [
     hostedLink: "https://world-countries-project.netlify.app/",
   },
   {
+    image: "/Country.png",
+    title: "Explore the World",
+    description:
+      "An interactive web application that allows users to explore countries, view details like population, region, and flag, and even compare countries side by side. This project showcases my ability to work with APIs, display dynamic content, and provide a seamless user experience for users to explore the world around them.",
+    githubLink: "https://github.com/SarimArain99/countries-Details.git",
+    hostedLink: "https://world-countries-project.netlify.app/",
+  },
+  {
     image: "/IMS.png",
     title: "Inventory Management System",
     description:

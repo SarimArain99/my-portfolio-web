@@ -14,7 +14,7 @@ function About() {
             <Image
               src="/sa.jpg"
               alt="Sarim"
-              className="object-bottom"
+              className="object-center"
               width={1000}
               height={1000}
             />
