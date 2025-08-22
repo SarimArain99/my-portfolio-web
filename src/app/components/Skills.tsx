@@ -3,8 +3,10 @@ import Image from "next/image";
 function Skills() {
   const skills = [
     { name: "Tailwind CSS", img: "/tailwind.png" },
-    { name: "Next.js", img: "/next.png" },
-    { name: "React.js", img: "/react.png" },
+    { name: "NODE.JS", img: "/node.png" },
+    { name: "NEXT.JS", img: "/next.png" },
+    { name: "REACT.JS", img: "/react.png" },
+    { name: "PYTHON", img: "/python.png" },
     { name: "TypeScript", img: "/ts.png" },
     { name: "JavaScript", img: "/js.png" },
     { name: "CSS", img: "/css.png" },
@@ -26,7 +28,9 @@ function Skills() {
               alt={skill.name}
               className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 mb-2 object-contain"
             />
-            <span className="text-center">{skill.name}</span>
+            <div className="text-center text-xs sm:text-sm md:text-base lg:text-lg">
+              {skill.name}
+            </div>
           </div>
         ))}
       </div>

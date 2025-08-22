@@ -29,6 +29,14 @@ const projects: projects[] = [
     hostedLink: "https://fashion-finds-store.vercel.app/",
   },
   {
+    image: "/hekto.png",
+    title: "Hekto E-Commerce Website (Complete UI Clone)",
+    description:
+      "A comprehensive UI clone of Hekto's e-commerce website, designed to reflect its stylish and responsive user interface. This project showcases my ability to recreate complex layouts, incorporate product categories and filters, and deliver an engaging online shopping experience.",
+    githubLink: "https://github.com/SarimArain99/Q2-hackathon.git",
+    hostedLink: "https://hekto-furniture-store.vercel.app/",
+  },
+  {
     image: "/codeAndBeyond.png",
     title: "Code and Beyond",
     description:
@@ -43,14 +51,6 @@ const projects: projects[] = [
       "A comprehensive car rental platform built to streamline the booking process for users. It features an intuitive navigation system, detailed car listings with filters for preferences like model and price range, and a sleek UI designed to deliver an unparalleled user experience. This project highlights my ability to merge functionality with aesthetics, making it a robust and user-friendly solution for the car rental industry.",
     githubLink: "https://github.com/SarimArain99/BORCELLE-CAR-RENTAL.git",
     hostedLink: "https://borcelle-car-rental.vercel.app/",
-  },
-  {
-    image: "/Country.png",
-    title: "Explore the World",
-    description:
-      "An interactive web application that allows users to explore countries, view details like population, region, and flag, and even compare countries side by side. This project showcases my ability to work with APIs, display dynamic content, and provide a seamless user experience for users to explore the world around them.",
-    githubLink: "https://github.com/SarimArain99/countries-Details.git",
-    hostedLink: "https://world-countries-project.netlify.app/",
   },
   {
     image: "/Country.png",
@@ -76,14 +76,7 @@ const projects: projects[] = [
     githubLink: "https://github.com/SarimArain99/rifzan-landing-page.git",
     hostedLink: "https://rifzan-landing-page.vercel.app/",
   },
-  {
-    image: "/hekto.png",
-    title: "Hekto E-Commerce Website (Complete UI Clone)",
-    description:
-      "A comprehensive UI clone of Hekto's e-commerce website, designed to reflect its stylish and responsive user interface. This project showcases my ability to recreate complex layouts, incorporate product categories and filters, and deliver an engaging online shopping experience.",
-    githubLink: "https://github.com/SarimArain99/Q2-hackathon.git",
-    hostedLink: "https://hekto-ecommerce-three.vercel.app/",
-  },
+  
   {
     image: "/dynamicResume.png",
     title: "Dynamic Resume Generator",

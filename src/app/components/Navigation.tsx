@@ -24,7 +24,7 @@ function Navigation() {
         <Link
           href="/"
           className={`group relative flex items-center gap-x-1 ${
-            pathName === "/" ? "border-b border-black" : ""
+            pathName === "/" ? "border-b border-black " : ""
           }`}
         >
           <svg
@@ -42,7 +42,7 @@ function Navigation() {
             />
           </svg>
           Work
-          <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-black transition-all duration-300 group-hover:w-full"></span>
+          <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-black transition-all duration-1000 group-hover:w-full"></span>
         </Link>
         <Link
           href="/about"
