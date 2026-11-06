@@ -7,7 +7,7 @@ export default function Footer() {
         <p>
           © 2026 Muhammad Sarim. Built with Next.js, React &amp; TypeScript.
         </p>
-        <ul className="flex flex-wrap gap-5">
+        <ul className="flex flex-wrap items-center gap-5">
           <li>
             <a href={PROFILE.github} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">
               GitHub
@@ -26,6 +26,11 @@ export default function Footer() {
           <li>
             <a href={`mailto:${PROFILE.email}`} className="transition-colors hover:text-white">
               Email
+            </a>
+          </li>
+          <li>
+            <a href="#top" className="font-semibold text-[#2dd4a7] transition-opacity hover:opacity-80">
+              Back to top ↑
             </a>
           </li>
         </ul>

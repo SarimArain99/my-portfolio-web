@@ -10,6 +10,15 @@ export const PROFILE = {
   site: "https://portfoliosarim.vercel.app",
 };
 
+export const STATS = [
+  { value: "4 Years", label: "of experience in Web Development" },
+  { value: "3 Years", label: "of experience in Agentic AI Development" },
+  { value: "2 Years", label: "of Teaching Website Development and AI" },
+];
+
+export const CURRENTLY =
+  "School Admin · Teaching Website Development & AI · Building a multi-school management system";
+
 export type Project = {
   title: string;
   problem: string;
@@ -71,7 +80,7 @@ export const MORE_PROJECTS = [
   {
     title: "ICLP — Islamic Science College Portal",
     description:
-      "The production portal for Islamic Science College (Boys), built for the school I administer.",
+      "The production portal for Islamic Science College, built for the school I administer.",
     tags: ["Next.js", "TypeScript"],
     live: "https://iclp-isc-edu.vercel.app",
     github: "https://github.com/SarimArain99/ICLP",

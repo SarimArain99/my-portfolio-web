@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Muhammad Sarim",
   },
   description:
-    "Muhammad Sarim is a software developer building Agentic AI systems. School Admin at Islamic Science College (Boys), 1,195 students. Featured work: Hackathon Todo Evolution, Physical AI & Humanoid Robotics, Data Encryption System, Crafted Visions.",
+    "Muhammad Sarim is a software developer building Agentic AI systems. School Admin at Islamic Science College, 1,195 students, and a teacher of Website Development with Next.js and AI. Featured work: Hackathon Todo Evolution, Physical AI & Humanoid Robotics, Data Encryption System, Crafted Visions.",
   keywords: [
     "Muhammad Sarim",
     "SarimArain99",
@@ -41,13 +41,13 @@ export const metadata: Metadata = {
     siteName: "Muhammad Sarim",
     title: "Muhammad Sarim — Software Developer & Agentic AI Builder",
     description:
-      "Software developer building Agentic AI systems — and the school software I wished existed.",
+      "Software developer building Agentic AI systems. Teacher of Website Development with Next.js and AI.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Muhammad Sarim — Software Developer & Agentic AI Builder",
     description:
-      "Software developer building Agentic AI systems — and the school software I wished existed.",
+      "Software developer building Agentic AI systems. Teacher of Website Development with Next.js and AI.",
   },
   robots: { index: true, follow: true },
 };

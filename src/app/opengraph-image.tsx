@@ -19,12 +19,12 @@ export default function Image() {
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ color: "#22c55e", fontSize: 28 }}>Muhammad Sarim</div>
+        <div style={{ color: "#2dd4a7", fontSize: 28 }}>Muhammad Sarim</div>
         <div style={{ color: "#ffffff", fontSize: 64, fontWeight: 700, marginTop: 16, lineHeight: 1.1 }}>
           Software developer building Agentic AI systems.
         </div>
         <div style={{ color: "#a1a1aa", fontSize: 28, marginTop: 24 }}>
-          School Admin · Islamic Science College (Boys) · github.com/SarimArain99
+          School Admin · Islamic Science College · Teacher of Website Development & AI · github.com/SarimArain99
         </div>
       </div>
     ),
