@@ -17,7 +17,7 @@ export const STATS = [
 ];
 
 export const CURRENTLY =
-  "School Admin · Teaching Website Development & AI · Building a multi-school management system";
+  "School Admin · Teaching Website Development & AI";
 
 export type Project = {
   title: string;

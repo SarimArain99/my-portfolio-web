@@ -233,10 +233,6 @@ export default function Home() {
                 using AI as part of the development workflow.
               </p>
               <p>
-                I&apos;m also building a multi-school management system —
-                software for schools, built from real experience running one.
-              </p>
-              <p>
                 The same instinct drives my other work: the Hackathon Todo
                 Evolution, which grows a simple app into an AI agent system;
                 the Physical AI &amp; Humanoid Robotics book; and tools like
