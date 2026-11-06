@@ -1,41 +1,66 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navigation from "./components/Navigation";
-import Footer from "./components/Footer";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+const geistSans = Geist({
   variable: "--font-geist-sans",
-  weight: "100 900",
+  subsets: ["latin"],
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+
+const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  weight: "100 900",
+  subsets: ["latin"],
 });
+
+const siteUrl = "https://portfoliosarim.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Dev.Sarim's Code Craft",
-  description: "Crafting modern web solutions with clean, efficient code. Designed and developed by Muhammad Sarim."
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Muhammad Sarim — Software Developer & Agentic AI Builder",
+    template: "%s | Muhammad Sarim",
+  },
+  description:
+    "Muhammad Sarim is a software developer building Agentic AI systems. School Admin at Islamic Science College (Boys), 1,195 students. Featured work: Hackathon Todo Evolution, Physical AI & Humanoid Robotics, Data Encryption System, Crafted Visions.",
+  keywords: [
+    "Muhammad Sarim",
+    "SarimArain99",
+    "Agentic AI",
+    "OpenAI Agents SDK",
+    "Next.js",
+    "TypeScript",
+    "Python",
+  ],
+  authors: [{ name: "Muhammad Sarim", url: siteUrl }],
+  creator: "Muhammad Sarim",
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: "Muhammad Sarim",
+    title: "Muhammad Sarim — Software Developer & Agentic AI Builder",
+    description:
+      "Software developer building Agentic AI systems — and the school software I wished existed.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Muhammad Sarim — Software Developer & Agentic AI Builder",
+    description:
+      "Software developer building Agentic AI systems — and the school software I wished existed.",
+  },
+  robots: { index: true, follow: true },
 };
 
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href='/favicon.png' type="image/x-icon" />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#F4F4F4]`}
-      >
-        <Navigation />
-        {children}
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full bg-[#050505] text-zinc-100 flex flex-col font-sans">
+        <Nav />
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>
