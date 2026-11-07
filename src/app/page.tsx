@@ -233,8 +233,9 @@ export default function Home() {
                 using AI as part of the development workflow.
               </p>
               <p>
-                The same instinct drives my other work: the Hackathon Todo
-                Evolution, which grows a simple app into an AI agent system;
+                The same instinct drives my other work: Dayline, built as
+                the Hackathon Todo Evolution project and renamed Dayline,
+                which grows a simple app into an AI agent system;
                 the Physical AI &amp; Humanoid Robotics book; and tools like
                 the Data Encryption System. I like building things that are
                 useful, honest, and easy to understand.

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Muhammad Sarim",
   },
   description:
-    "Muhammad Sarim is a software developer building Agentic AI systems. School Admin at Islamic Science College, 1,195 students, and a teacher of Website Development with Next.js and AI. Featured work: Hackathon Todo Evolution, Physical AI & Humanoid Robotics, Data Encryption System, Crafted Visions.",
+    "Muhammad Sarim is a software developer building Agentic AI systems. School Admin at Islamic Science College, 1,195 students, and a teacher of Website Development with Next.js and AI. Featured work: Dayline (built as the Hackathon Todo Evolution project and renamed Dayline), Physical AI & Humanoid Robotics, Data Encryption System, Crafted Visions.",
   keywords: [
     "Muhammad Sarim",
     "SarimArain99",

@@ -31,15 +31,15 @@ export type Project = {
 
 export const FEATURED_PROJECTS: Project[] = [
   {
-    title: "Hackathon Todo Evolution",
+    title: "Dayline",
     problem:
-      "A simple Todo app, rebuilt in five spec-driven phases until it becomes an AI agent system.",
+      "Built as the Hackathon Todo Evolution project and renamed Dayline — a simple Todo app, rebuilt in five spec-driven phases until it becomes an AI agent system.",
     outcome:
       "Each phase adds a layer — in-memory, then persistent, then agent-driven — so the same app shows how a spec evolves into agentic software.",
     tags: ["Python", "Agentic AI", "OpenAI Agents SDK"],
     live: "https://zenith-flow-zeta.vercel.app",
     github: "https://github.com/SarimArain99/hackathon-todo-evolution",
-    initials: "TE",
+    initials: "DL",
   },
   {
     title: "Physical AI & Humanoid Robotics",

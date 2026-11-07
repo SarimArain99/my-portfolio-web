@@ -22,7 +22,8 @@ project cards, and a scroll-spy nav with active-section underline.
 - **Hero** — name, one-line value prop, teacher role, CTAs, a "Currently"
   line, and an experience stats strip (4 Years Web Development, 3 Years
   Agentic AI Development, 2 Years Teaching Website Development and AI)
-- **Featured Projects** — exactly 4: Hackathon Todo Evolution, Physical AI
+- **Featured Projects** — exactly 4: Dayline (built as the Hackathon Todo
+  Evolution project and renamed Dayline), Physical AI
   & Humanoid Robotics, Data Encryption System, Crafted Visions
 - **More projects** — ICLP only
 - **About** — School Admin at Islamic Science College (1,195 students),
