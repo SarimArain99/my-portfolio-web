@@ -37,7 +37,7 @@ export const FEATURED_PROJECTS: Project[] = [
     outcome:
       "Each phase adds a layer — in-memory, then persistent, then agent-driven — so the same app shows how a spec evolves into agentic software.",
     tags: ["Python", "Agentic AI", "OpenAI Agents SDK"],
-    live: "https://zenith-flow-zeta.vercel.app",
+    live: "https://dayline-todo.vercel.app",
     github: "https://github.com/SarimArain99/hackathon-todo-evolution",
     initials: "DL",
   },
