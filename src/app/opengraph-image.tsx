@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { PALETTE } from "@/lib/palette";
 
 export const alt = "Muhammad Sarim — Software Developer & Agentic AI Builder";
 export const size = { width: 1200, height: 630 };
@@ -14,17 +15,26 @@ export default function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          backgroundColor: "#050505",
+          backgroundColor: PALETTE.paper,
           padding: "80px",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ color: "#2dd4a7", fontSize: 28 }}>Muhammad Sarim</div>
-        <div style={{ color: "#ffffff", fontSize: 64, fontWeight: 700, marginTop: 16, lineHeight: 1.1 }}>
+        <div style={{ color: PALETTE.accent, fontSize: 28 }}>Muhammad Sarim</div>
+        <div
+          style={{
+            backgroundColor: PALETTE.gold,
+            height: 8,
+            width: 120,
+            marginTop: 32,
+          }}
+        />
+        <div style={{ color: PALETTE.ink, fontSize: 64, fontWeight: 700, marginTop: 16, lineHeight: 1.1 }}>
           Software developer building Agentic AI systems.
         </div>
-        <div style={{ color: "#a1a1aa", fontSize: 28, marginTop: 24 }}>
-          School Admin · Islamic Science College · Teacher of Website Development & AI · github.com/SarimArain99
+        <div style={{ color: PALETTE.muted, fontSize: 28, marginTop: 24 }}>
+          School Admin, Islamic Science College. Teacher of Website Development
+          and AI. github.com/SarimArain99
         </div>
       </div>
     ),

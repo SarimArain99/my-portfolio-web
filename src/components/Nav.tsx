@@ -41,27 +41,27 @@ export default function Nav() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-[#1f1f1f] bg-[#050505]/90 backdrop-blur transition-shadow ${
-        scrolled ? "shadow-[0_8px_30px_rgba(0,0,0,0.5)]" : ""
+      className={`sticky top-0 z-50 border-b border-line bg-paper/90 backdrop-blur transition-shadow ${
+        scrolled ? "shadow-nav" : ""
       }`}
     >
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-5 sm:px-8">
         <Link href="#top" className="font-mono text-sm font-bold tracking-tight">
-          <span className="text-white">M.Sarim</span>
-          <span className="text-[#2dd4a7]">.</span>
+          <span className="text-ink">M.Sarim</span>
+          <span className="text-accent">.</span>
         </Link>
-        <nav className="hidden items-center gap-7 text-sm text-zinc-400 sm:flex" aria-label="Main">
+        <nav className="hidden items-center gap-7 text-sm text-muted sm:flex" aria-label="Main">
           {LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`relative pb-1 transition-colors hover:text-white ${
-                active === l.id ? "text-white" : ""
+              className={`relative pb-1 transition-colors hover:text-accent ${
+                active === l.id ? "text-ink" : ""
               }`}
             >
               {l.label}
               <span
-                className={`absolute inset-x-0 -bottom-0.5 h-0.5 rounded-full bg-[#2dd4a7] transition-transform duration-300 ${
+                className={`absolute inset-x-0 -bottom-0.5 h-0.5 rounded-full bg-accent transition-transform duration-300 ${
                   active === l.id ? "scale-x-100" : "scale-x-0"
                 }`}
               />
@@ -69,14 +69,14 @@ export default function Nav() {
           ))}
           <a
             href={`mailto:${PROFILE.email}`}
-            className="rounded-full border border-[#2dd4a7] px-4 py-1.5 text-[#2dd4a7] transition-colors hover:bg-[#2dd4a7] hover:text-black"
+            className="rounded-full border border-accent px-4 py-1.5 text-accent transition-colors hover:bg-accent hover:text-accent-ink"
           >
             Get in touch
           </a>
         </nav>
         <button
           type="button"
-          className="rounded-md border border-[#1f1f1f] px-3 py-1.5 text-sm text-zinc-300 sm:hidden"
+          className="rounded-md border border-line px-3 py-1.5 text-sm text-ink sm:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label="Toggle menu"
@@ -85,22 +85,22 @@ export default function Nav() {
         </button>
       </div>
       {open && (
-        <nav className="border-t border-[#1f1f1f] px-5 py-4 sm:hidden" aria-label="Mobile">
+        <nav className="border-t border-line px-5 py-4 sm:hidden" aria-label="Mobile">
           <ul className="flex flex-col gap-3 text-sm">
             {LINKS.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className={active === l.id ? "text-[#2dd4a7]" : "text-zinc-300"}
+                  className={active === l.id ? "text-accent" : "text-muted"}
                 >
                   {l.label}
                 </Link>
               </li>
             ))}
             <li>
-              <a href={`mailto:${PROFILE.email}`} className="text-[#2dd4a7]">
-                Get in touch →
+              <a href={`mailto:${PROFILE.email}`} className="text-accent">
+                Get in touch
               </a>
             </li>
           </ul>

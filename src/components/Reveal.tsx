@@ -17,6 +17,7 @@ export default function Reveal({
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    document.documentElement.classList.add("js");
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
