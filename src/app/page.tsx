@@ -1,6 +1,28 @@
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
+import { BookCover, VaultDiagram } from "@/components/ProjectVisuals";
 import { CURRENTLY, FEATURED_PROJECTS, MORE_PROJECTS, PROFILE, STATS } from "@/lib/data";
+
+function ExternalIcon() {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      aria-hidden="true"
+      className="shrink-0"
+    >
+      <path
+        d="M3 9L9 3M9 3H4.5M9 3v4.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 function SectionHeading({ kicker, title }: { kicker: string; title: string }) {
   return (
@@ -120,20 +142,25 @@ export default function Home() {
           {FEATURED_PROJECTS.map((p, i) => (
             <Reveal key={p.title} delay={(i % 2) * 120}>
               <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors transition-transform transition-shadow duration-300 hover:-translate-y-1.5 hover:border-accent/60 hover:shadow-card">
-                {/* Card header: CSS mock browser chrome, not a fake screenshot */}
-                <div className="border-b border-line bg-paper px-4 pb-6 pt-4">
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-2.5 w-2.5 rounded-full bg-muted" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-muted" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-accent" />
-                  </div>
-                  <p className="mt-6 font-mono text-4xl font-bold text-ink transition-transform duration-300 group-hover:-translate-y-0.5">
-                    {p.initials}
-                    <span className="text-accent">.</span>
-                  </p>
-                  <p className="mt-2 font-mono text-xs text-muted">
-                    {p.live ? new URL(p.live).host : "github.com"}
-                  </p>
+                {/* Real visual per project: screenshot, book cover, or diagram — never fake chrome or initials */}
+                <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-panel">
+                  {p.visual.kind === "screenshot" ? (
+                    <Image
+                      src={p.visual.src}
+                      alt={p.visual.alt}
+                      fill
+                      className="object-cover object-top"
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                    />
+                  ) : p.visual.kind === "cover" ? (
+                    <div className="flex h-full items-center justify-center py-4">
+                      <BookCover />
+                    </div>
+                  ) : (
+                    <div className="flex h-full items-center bg-surface px-4 sm:px-6">
+                      <VaultDiagram />
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-1 flex-col p-6">
                   <h3 className="text-xl font-bold text-ink">{p.title}</h3>
@@ -150,18 +177,20 @@ export default function Home() {
                         href={p.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-accent hover:underline"
+                        className="inline-flex items-center gap-1.5 text-accent hover:underline"
                       >
-                        Live site ↗
+                        Live site
+                        <ExternalIcon />
                       </a>
                     )}
                     <a
                       href={p.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-ink hover:underline"
+                      className="inline-flex items-center gap-1.5 text-ink hover:underline"
                     >
-                      GitHub ↗
+                      GitHub
+                      <ExternalIcon />
                     </a>
                   </div>
                 </div>
@@ -188,11 +217,13 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex shrink-0 gap-5 text-sm font-semibold">
-                  <a href={p.live} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-                    Live site ↗
+                  <a href={p.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-accent hover:underline">
+                    Live site
+                    <ExternalIcon />
                   </a>
-                  <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-ink hover:underline">
-                    GitHub ↗
+                  <a href={p.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-ink hover:underline">
+                    GitHub
+                    <ExternalIcon />
                   </a>
                 </div>
               </li>
@@ -237,8 +268,7 @@ export default function Home() {
                 the Hackathon Todo Evolution project and renamed Dayline,
                 which grows a simple app into an AI agent system;
                 the Physical AI &amp; Humanoid Robotics book; and tools like
-                the Data Encryption System. I like building things that are
-                useful, honest, and easy to understand.
+                CipherVault. I like building things that are useful, honest, and easy to understand.
               </p>
               <p className="text-muted">
                 Stack I use most: React, Next.js, TypeScript, Python, Agentic
@@ -325,7 +355,6 @@ export default function Home() {
       {/* Contact */}
       <section id="contact" className="scroll-mt-20 border-t border-line py-20 text-center">
         <Reveal>
-          <p className="text-xs text-muted">04 — Contact</p>
           <h2 className="mx-auto mt-3 max-w-xl text-4xl font-bold tracking-tight text-ink sm:text-5xl">
             Let&apos;s build something useful.
           </h2>
@@ -342,18 +371,21 @@ export default function Home() {
           </a>
           <ul className="mt-10 flex flex-wrap justify-center gap-6 text-sm font-semibold">
             <li>
-              <a href={PROFILE.github} target="_blank" rel="noopener noreferrer" className="text-ink transition-colors hover:text-accent">
-                GitHub ↗
+              <a href={PROFILE.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-ink transition-colors hover:text-accent">
+                GitHub
+                <ExternalIcon />
               </a>
             </li>
             <li>
-              <a href={PROFILE.instagram} target="_blank" rel="noopener noreferrer" className="text-ink transition-colors hover:text-accent">
-                Instagram {PROFILE.instagramHandle} ↗
+              <a href={PROFILE.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-ink transition-colors hover:text-accent">
+                Instagram {PROFILE.instagramHandle}
+                <ExternalIcon />
               </a>
             </li>
             <li>
-              <a href={PROFILE.linkedin} target="_blank" rel="noopener noreferrer" className="text-ink transition-colors hover:text-accent">
-                LinkedIn ↗
+              <a href={PROFILE.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-ink transition-colors hover:text-accent">
+                LinkedIn
+                <ExternalIcon />
               </a>
             </li>
           </ul>

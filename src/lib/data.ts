@@ -19,6 +19,11 @@ export const STATS = [
 export const CURRENTLY =
   "School Admin · Teaching Website Development & AI";
 
+export type ProjectVisual =
+  | { kind: "screenshot"; src: string; alt: string }
+  | { kind: "cover"; alt: string }
+  | { kind: "diagram"; alt: string };
+
 export type Project = {
   title: string;
   problem: string;
@@ -26,7 +31,7 @@ export type Project = {
   tags: string[];
   live?: string;
   github: string;
-  initials: string;
+  visual: ProjectVisual;
 };
 
 export const FEATURED_PROJECTS: Project[] = [
@@ -39,7 +44,11 @@ export const FEATURED_PROJECTS: Project[] = [
     tags: ["Python", "Agentic AI", "OpenAI Agents SDK"],
     live: "https://dayline-todo.vercel.app",
     github: "https://github.com/SarimArain99/hackathon-todo-evolution",
-    initials: "DL",
+    visual: {
+      kind: "screenshot",
+      src: "/projects/dayline.jpg",
+      alt: "Screenshot of the Dayline app showing the day timeline",
+    },
   },
   {
     title: "Physical AI & Humanoid Robotics",
@@ -51,17 +60,24 @@ export const FEATURED_PROJECTS: Project[] = [
     live: "https://physical-ai-and-humanoid-robotics-sarim.vercel.app",
     github:
       "https://github.com/SarimArain99/physical-ai-and-humanoid-robotics",
-    initials: "PA",
+    visual: {
+      kind: "cover",
+      alt: "Cover of the book Physical AI and Humanoid Robotics",
+    },
   },
   {
-    title: "Data Encryption System",
+    title: "CipherVault",
     problem:
-      "Sensitive data needs a safe place — a Streamlit app that encrypts and stores it securely.",
+      "Secrets need a place where even the server can't read them — a zero-knowledge vault that encrypts in the browser before anything is stored.",
     outcome:
-      "A secure data vault: encrypt what matters, store it, and get it back only when you need it.",
-    tags: ["Python", "Streamlit"],
-    github: "https://github.com/SarimArain99/Data-EncryptionSystem",
-    initials: "DE",
+      "AES-256-GCM encryption in the browser, file tools, a password generator, and expiring share links — live and verified end to end.",
+    tags: ["Next.js", "TypeScript", "WebCrypto"],
+    live: "https://cipher-vault-bice.vercel.app",
+    github: "https://github.com/SarimArain99/CipherVault",
+    visual: {
+      kind: "diagram",
+      alt: "Diagram of CipherVault's encryption flow, from plaintext to ciphertext",
+    },
   },
   {
     title: "Crafted Visions",
@@ -72,7 +88,11 @@ export const FEATURED_PROJECTS: Project[] = [
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     live: "https://crafted-visions-projects.vercel.app",
     github: "https://github.com/SarimArain99/Crafted-Visions",
-    initials: "CV",
+    visual: {
+      kind: "screenshot",
+      src: "/projects/crafted-visions.jpg",
+      alt: "Screenshot of the Crafted Visions homepage illustration",
+    },
   },
 ];
 
