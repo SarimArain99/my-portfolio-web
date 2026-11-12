@@ -51,7 +51,7 @@ export function BookCover() {
         </tspan>
       </text>
       <rect x="34" y="212" width="56" height="3" className="fill-accent" />
-      {/* Sense – Think – Act loop */}
+      {/* Sense, Think, Act loop */}
       <g className="fill-ink font-sans" fontSize="13">
         <circle cx="52" cy="278" r="17" className="fill-panel stroke-line" />
         <circle cx="150" cy="278" r="17" className="fill-panel stroke-line" />
@@ -127,7 +127,7 @@ export function VaultDiagram() {
         <text x="262" y="76" className="fill-paper font-mono" fontSize="15">
           AES-256-GCM
         </text>
-        <text x="262" y="98" className="fill-paper font-sans" fontSize="12" opacity="0.75">
+        <text x="262" y="98" className="fill-paper font-sans" fontSize="11" opacity="0.75">
           600,000 PBKDF2 rounds
         </text>
         <text x="300" y="150" textAnchor="middle" className="fill-muted font-sans" fontSize="11">

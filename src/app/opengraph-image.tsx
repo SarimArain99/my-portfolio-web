@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { PALETTE } from "@/lib/palette";
 
-export const alt = "Muhammad Sarim — Software Developer & Agentic AI Builder";
+export const alt = "Muhammad Sarim, Software Developer and Agentic AI Builder";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

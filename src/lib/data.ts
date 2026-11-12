@@ -11,13 +11,13 @@ export const PROFILE = {
 };
 
 export const STATS = [
-  { value: "4 Years", label: "of experience in Web Development" },
-  { value: "3 Years", label: "of experience in Agentic AI Development" },
-  { value: "2 Years", label: "of Teaching Website Development and AI" },
+  { value: "4 Years", label: "Web Development" },
+  { value: "3 Years", label: "Agentic AI" },
+  { value: "2 Years", label: "Teaching" },
 ];
 
 export const CURRENTLY =
-  "School Admin · Teaching Website Development & AI";
+  "School Admin, Teaching Website Development and AI";
 
 export type ProjectVisual =
   | { kind: "screenshot"; src: string; alt: string }
@@ -38,9 +38,9 @@ export const FEATURED_PROJECTS: Project[] = [
   {
     title: "Dayline",
     problem:
-      "Built as the Hackathon Todo Evolution project and renamed Dayline — a simple Todo app, rebuilt in five spec-driven phases until it becomes an AI agent system.",
+      "Hackathon Todo Evolution, rebuilt in five phases into an AI agent system.",
     outcome:
-      "Each phase adds a layer — in-memory, then persistent, then agent-driven — so the same app shows how a spec evolves into agentic software.",
+      "Five phases: in-memory, persistence, auth, AI assistant.",
     tags: ["Python", "Agentic AI", "OpenAI Agents SDK"],
     live: "https://dayline-todo.vercel.app",
     github: "https://github.com/SarimArain99/hackathon-todo-evolution",
@@ -53,9 +53,9 @@ export const FEATURED_PROJECTS: Project[] = [
   {
     title: "Physical AI & Humanoid Robotics",
     problem:
-      "A book about Physical AI and humanoid robotics — bridging the gap between the digital brain and the physical body.",
+      "An online book on Physical AI and humanoid robotics.",
     outcome:
-      "A complete online book that students can read and learn from, covering how AI moves from software into real robots.",
+      "How AI moves from software into robots.",
     tags: ["Next.js", "TypeScript", "React"],
     live: "https://physical-ai-and-humanoid-robotics-sarim.vercel.app",
     github:
@@ -68,9 +68,9 @@ export const FEATURED_PROJECTS: Project[] = [
   {
     title: "CipherVault",
     problem:
-      "Secrets need a place where even the server can't read them — a zero-knowledge vault that encrypts in the browser before anything is stored.",
+      "A zero-knowledge vault that encrypts in the browser first.",
     outcome:
-      "AES-256-GCM encryption in the browser, file tools, a password generator, and expiring share links — live and verified end to end.",
+      "AES-256-GCM in the browser, file tools, and expiring share links.",
     tags: ["Next.js", "TypeScript", "WebCrypto"],
     live: "https://cipher-vault-bice.vercel.app",
     github: "https://github.com/SarimArain99/CipherVault",
@@ -79,26 +79,91 @@ export const FEATURED_PROJECTS: Project[] = [
       alt: "Diagram of CipherVault's encryption flow, from plaintext to ciphertext",
     },
   },
+];
+
+export const SERVICES = [
   {
-    title: "Crafted Visions",
-    problem:
-      "A modern mini website to showcase creative and technical projects in one place.",
-    outcome:
-      "A sleek, fast showcase — the kind of site that lets the work speak first.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    live: "https://crafted-visions-projects.vercel.app",
-    github: "https://github.com/SarimArain99/Crafted-Visions",
-    visual: {
-      kind: "screenshot",
-      src: "/projects/crafted-visions.jpg",
-      alt: "Screenshot of the Crafted Visions homepage illustration",
-    },
+    name: "Website",
+    rows: [
+      "A fast site on your domain",
+      "Businesses that need to be found",
+      "Contact form, maps, SEO",
+    ],
+  },
+  {
+    name: "AI assistant",
+    rows: [
+      "Answers from your pages or FAQ",
+      "Same questions, answered daily",
+      "Your logo, setup guide",
+    ],
+    recommended: true,
+  },
+  {
+    name: "Automation",
+    rows: [
+      "One automation, two apps",
+      "Repetitive work done by hand",
+      "Runs itself",
+    ],
+  },
+];
+
+export const SERVICE_ROW_LABELS = ["What you get", "Good for", "Included"];
+
+export const LIVE = {
+  heading: "What would I build for you?",
+  note: "Type your business. This is the first screen and the chat greeting I would start from.",
+  placeholder: "Islamic Science College",
+  examples: ["Islamic Science College"],
+};
+
+export const INDEX_ITEMS: { name: string; kind: "AI" | "Web"; href: string }[] = [
+  { name: "Dayline", kind: "AI", href: "https://github.com/SarimArain99/hackathon-todo-evolution" },
+  { name: "Physical AI book", kind: "AI", href: "https://github.com/SarimArain99/physical-ai-and-humanoid-robotics" },
+  { name: "CipherVault", kind: "Web", href: "https://github.com/SarimArain99/CipherVault" },
+  { name: "ICLP", kind: "Web", href: "https://github.com/SarimArain99/ICLP" },
+];
+
+export const TOOLBOX: { name: string; rows: [string, string][] }[] = [
+  {
+    name: "AI",
+    rows: [
+      ["OpenAI Agents SDK", "Dayline"],
+      ["RAG with Qdrant", "Physical AI"],
+      ["Agentic AI", "Dayline"],
+      ["Claude Code", "this site"],
+    ],
+  },
+  {
+    name: "Web",
+    rows: [
+      ["Next.js and React", "this site"],
+      ["Tailwind CSS", "this site"],
+      ["TypeScript", "all three projects"],
+      ["three.js", "this site"],
+    ],
+  },
+  {
+    name: "Backend and data",
+    rows: [
+      ["Python", "Dayline"],
+      ["PostgreSQL (Neon)", "CipherVault"],
+      ["WebCrypto", "CipherVault"],
+    ],
+  },
+  {
+    name: "Ship",
+    rows: [
+      ["Vercel", "most projects"],
+      ["GitHub", "all projects"],
+    ],
   },
 ];
 
 export const MORE_PROJECTS = [
   {
-    title: "ICLP — Islamic Science College Portal",
+    title: "ICLP, Islamic Science College Portal",
     description:
       "The production portal for Islamic Science College, built for the school I administer.",
     tags: ["Next.js", "TypeScript"],
