@@ -325,7 +325,7 @@ export default function Home() {
       {/* Contact */}
       <section id="contact" className="scroll-mt-20 border-t border-line py-20 text-center">
         <Reveal>
-          <p className="text-xs text-muted">04 · Contact</p>
+          <p className="text-xs text-muted">04 — Contact</p>
           <h2 className="mx-auto mt-3 max-w-xl text-4xl font-bold tracking-tight text-ink sm:text-5xl">
             Let&apos;s build something useful.
           </h2>
