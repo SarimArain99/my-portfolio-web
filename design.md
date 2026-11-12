@@ -23,8 +23,10 @@ locks the house style so later pages inherit it instead of re-arguing it.
   and one work stage. Shapes are sampled from outlines, one point
   per particle, isotropic mapping — filled glyphs sample into a
   solid mass, and independent x/y sampling smears a shape into its
-  bounding box. The hero wordmark cycles name → clock → lock → book
-  every 5.2s. Phones get a static dot poster and the wordmark as text.
+  bounding box. The hero wordmark is the name, in one place, always:
+  it never cycles or rotates; its particles only lean gently toward
+  the pointer and warm to amber near it. Phones get a static dot poster
+  and the wordmark as text.
 
 ## Waived Hallmark reflex gates (on the record in `src/app/globals.css`)
 

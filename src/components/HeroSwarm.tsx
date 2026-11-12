@@ -11,49 +11,36 @@ const Swarm = dynamic(
   { ssr: false },
 );
 
-const MARKS: ShapeSpec[] = [
-  { kind: "mark", id: "clock" },
-  { kind: "mark", id: "lock" },
-  { kind: "mark", id: "book" },
-];
-
 /**
- * The hero swarm: writes "Muhammad Sarim" in particles, then rebuilds
- * itself into the mark of each product in turn. Typing a business name
- * in the live demo chapter rewrites the swarm to that name instead.
+ * The hero swarm: writes "Muhammad Sarim" in particles and leaves it
+ * there, in one place. No morphing through the product marks, no
+ * rotation: the name stays put and stays readable. Typing a business
+ * name in the live demo chapter rewrites the swarm to that name instead.
  * Without WebGL the section gets data-field="off" and shows the
  * wordmark as text.
  */
 export function HeroSwarm({ className = "" }: { className?: string }) {
   const [text, setText] = useState("Muhammad Sarim");
-  const [active, setActive] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const on = (e: Event) => {
       const name = (e as CustomEvent<string>).detail.trim();
       setText(name || "Muhammad Sarim");
-      setActive(0);
     };
     window.addEventListener(BUSINESS_EVENT, on);
     return () => window.removeEventListener(BUSINESS_EVENT, on);
   }, []);
 
-  useEffect(() => {
-    const t = setInterval(
-      () => setActive((a) => (a + 1) % (MARKS.length + 1)),
-      5200,
-    );
-    return () => clearInterval(t);
-  }, []);
-
-  const shapes: ShapeSpec[] = [{ kind: "text", lines: [text] }, ...MARKS];
+  // One shape only: the name. It never cycles away, so it is always
+  // there to read.
+  const shapes: ShapeSpec[] = [{ kind: "text", lines: [text] }];
   // The swarm canvas is full-bleed behind the hero; the focus cell (the
   // wordmark area) sits left and below the headline on desktop, centred
   // and lower on phones, so the shape is shifted into that cell.
   const offset =
     typeof window !== "undefined" && window.innerWidth >= 900
-      ? { x: -1.9, y: -1.75 }
+      ? { x: -1.3, y: -1.75 }
       : { x: 0, y: -0.9 };
 
   return (
@@ -61,9 +48,9 @@ export function HeroSwarm({ className = "" }: { className?: string }) {
       <Swarm
         className="block size-full"
         shapes={shapes}
-        active={active}
+        active={0}
         offset={offset}
-        count={{ desktop: 5500, phone: 2500 }}
+        count={{ desktop: 7000, phone: 3000 }}
         label={`${text}, written in particles`}
         onReady={(ok) => {
           const section = ref.current?.closest("section");

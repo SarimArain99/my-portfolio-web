@@ -10,8 +10,10 @@ export type ShapeSpec =
  * Plain three.js particle field. Particles are sampled from a shape drawn
  * on an offscreen canvas (a wordmark, a clock, a padlock, an open book)
  * and spring toward their target points, so the swarm rebuilds itself
- * into a new mark whenever the active shape changes. Pointer repulsion
- * warms particles to amber near the cursor (fine pointers only).
+ * into a new mark whenever the active shape changes. The field never
+ * rotates: the shape faces the viewer and stays in one place, and
+ * particles near the pointer lean gently toward it and warm to amber
+ * (fine pointers only).
  * Phones, coarse pointers, missing WebGL and reduced motion get a static
  * dot poster instead of a simulation; the parent shows its text fallback.
  */
@@ -50,7 +52,7 @@ function collectPoints(
     const scale = WORLD_W / w;
     out[i * 3] = (pts[j] - w / 2) * scale;
     out[i * 3 + 1] = (h / 2 - pts[j + 1]) * scale;
-    out[i * 3 + 2] = (Math.random() - 0.5) * 0.5;
+    out[i * 3 + 2] = (Math.random() - 0.5) * 0.3;
   }
   return out;
 }
@@ -78,8 +80,10 @@ function drawShape(
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     // Outlines only: filled 900-weight glyphs sample into a solid
-    // mass of dots; stroked outlines read as letterforms.
-    ctx.lineWidth = Math.max(3, size * 0.04);
+    // mass of dots; stroked outlines read as letterforms. The stroke
+    // is kept thick so the name samples into a dense, readable line
+    // of dots rather than a faint trace.
+    ctx.lineWidth = Math.max(3, size * 0.06);
     const total = lines.length * size * 0.95;
     lines.forEach((line, i) => {
       ctx.strokeText(line, cx, cy - total / 2 + size * 0.95 * (i + 0.5));
@@ -154,7 +158,18 @@ function sampleShape(shape: ShapeSpec, count: number): Float32Array {
   const ctx = canvas.getContext("2d");
   if (!ctx) return new Float32Array(count * 3);
   drawShape(ctx, w, h, shape);
-  return collectPoints(ctx, w, h, count);
+  const pts = collectPoints(ctx, w, h, count);
+  if (shape.kind === "text") {
+    // The name is the point of the hero: render it large enough to
+    // read as letters, not a dense band. 1.4x keeps it inside the
+    // frame at desktop aspects (see the focus-cell offset in
+    // HeroSwarm) while making each glyph ~40% taller.
+    for (let i = 0; i < count; i++) {
+      pts[i * 3] *= 1.4;
+      pts[i * 3 + 1] *= 1.4;
+    }
+  }
+  return pts;
 }
 
 export function SwarmField({
@@ -270,7 +285,7 @@ export function SwarmField({
       const positions = new Float32Array(targets[activeRef.current]);
       const velocities = new Float32Array(n * 3);
       const stiffness = new Float32Array(n);
-      for (let i = 0; i < n; i++) stiffness[i] = 0.04 + Math.random() * 0.05;
+      for (let i = 0; i < n; i++) stiffness[i] = 0.05 + Math.random() * 0.05;
       const colors = new Float32Array(n * 3);
       const base = new Float32Array(n * 3);
       const cream = new THREE.Color("#f5efe6");
@@ -289,7 +304,7 @@ export function SwarmField({
       geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
       geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
       const material = new THREE.PointsMaterial({
-        size: 0.03,
+        size: 0.035,
         vertexColors: true,
         transparent: true,
         opacity: 0.92,
@@ -298,7 +313,9 @@ export function SwarmField({
       const points = new THREE.Points(geometry, material);
       const group = new THREE.Group();
       group.add(points);
-      group.rotation.x = 0.12;
+      // No rotation, no tilt: the shape faces the viewer square-on
+      // and stays in one place. Particles only lean toward the
+      // pointer (below); their springs hold the shape.
       scene.add(group);
 
       let visible = true;
@@ -358,11 +375,16 @@ export function SwarmField({
           const dx = arr[ix] - px;
           const dy = arr[ix + 1] - py;
           const d2 = dx * dx + dy * dy;
-          if (d2 < 1.0 && d2 > 0.0001) {
+          // Lean toward the cursor, not away from it: a gentle pull
+          // (far weaker than the springs, so the letters keep their
+          // shape and the particles settle straight back when the
+          // pointer moves on). Particles near the cursor also warm
+          // to amber.
+          if (d2 < 0.7 && d2 > 0.0001) {
             const d = Math.sqrt(d2);
-            const push = ((1 - d) * 0.06) / d;
-            velocities[ix] += dx * push;
-            velocities[ix + 1] += dy * push;
+            const pull = ((1 - d) * 0.012) / d;
+            velocities[ix] -= dx * pull;
+            velocities[ix + 1] -= dy * pull;
           }
           velocities[ix] *= 0.85;
           velocities[ix + 1] *= 0.85;
@@ -377,7 +399,6 @@ export function SwarmField({
         }
         pos.needsUpdate = true;
         col.needsUpdate = true;
-        group.rotation.y += 0.0012;
         renderer.render(scene, camera);
         if (!reduced) raf = requestAnimationFrame(tick);
       };
