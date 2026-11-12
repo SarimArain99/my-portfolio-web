@@ -13,9 +13,12 @@ export type ShapeSpec =
  * into a new mark whenever the active shape changes. The field never
  * rotates: the shape faces the viewer and stays in one place, and
  * particles near the pointer lean gently toward it and warm to amber
- * (fine pointers only).
- * Phones, coarse pointers, missing WebGL and reduced motion get a static
- * dot poster instead of a simulation; the parent shows its text fallback.
+ * (fine pointers only). On touch screens there is no cursor, so the
+ * pointer drifts slowly on its own and follows a finger drag instead,
+ * so the field is alive on phones too. Phones use the smaller particle
+ * count and the same DPR cap. Missing WebGL and reduced motion get a
+ * static dot poster instead of a simulation; the parent shows its
+ * text fallback.
  */
 
 const WORLD_W = 5.6;
@@ -147,7 +150,11 @@ function drawShape(
   ctx.stroke();
 }
 
-function sampleShape(shape: ShapeSpec, count: number): Float32Array {
+function sampleShape(
+  shape: ShapeSpec,
+  count: number,
+  textScale: number,
+): Float32Array {
   // Text is wide: a 960x320 sheet lets the wordmark fill the world
   // width at a readable height. Marks stay on the square sheet.
   const w = shape.kind === "text" ? 960 : 480;
@@ -161,12 +168,12 @@ function sampleShape(shape: ShapeSpec, count: number): Float32Array {
   const pts = collectPoints(ctx, w, h, count);
   if (shape.kind === "text") {
     // The name is the point of the hero: render it large enough to
-    // read as letters, not a dense band. 1.4x keeps it inside the
-    // frame at desktop aspects (see the focus-cell offset in
-    // HeroSwarm) while making each glyph ~40% taller.
+    // read as letters, not a dense band. The scale is chosen by the
+    // caller per screen (desktop single line 1.4x; phones stack the
+    // name on two lines at 0.85x so it fits a narrow viewport).
     for (let i = 0; i < count; i++) {
-      pts[i * 3] *= 1.4;
-      pts[i * 3 + 1] *= 1.4;
+      pts[i * 3] *= textScale;
+      pts[i * 3 + 1] *= textScale;
     }
   }
   return pts;
@@ -179,6 +186,7 @@ export function SwarmField({
   label,
   className = "",
   offset = { x: 0, y: 0 },
+  textScale = 1,
   onReady,
 }: {
   shapes: ShapeSpec[];
@@ -188,6 +196,8 @@ export function SwarmField({
   className?: string;
   /** World-space shift of every target point, to centre the shape in a focus cell. */
   offset?: { x: number; y: number };
+  /** World-space scale applied to text shapes only (marks stay 1). */
+  textScale?: number;
   onReady?: (ok: boolean) => void;
 }) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -195,23 +205,13 @@ export function SwarmField({
   useEffect(() => {
     activeRef.current = active;
   }, [active]);
-  const [poster, setPoster] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      (window.matchMedia("(pointer: coarse)").matches ||
-        window.innerWidth < 768),
-  );
+  // Poster is only a fallback for a failed WebGL start, never a
+  // phone decision: the simulation runs on touch screens too.
+  const [poster, setPoster] = useState(false);
 
   useEffect(() => {
     const host = hostRef.current;
     if (!host) return;
-    const coarse =
-      window.matchMedia("(pointer: coarse)").matches ||
-      window.innerWidth < 768;
-    if (coarse) {
-      onReady?.(false);
-      return;
-    }
     let cancelled = false;
     let cleanup: (() => void) | undefined;
 
@@ -275,7 +275,7 @@ export function SwarmField({
       camera.position.z = 7.4;
 
       const targets = shapes.map((s) => {
-        const t = sampleShape(s, n);
+        const t = sampleShape(s, n, textScale);
         for (let i = 0; i < n; i++) {
           t[i * 3] += offset.x;
           t[i * 3 + 1] += offset.y;
@@ -304,7 +304,9 @@ export function SwarmField({
       geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
       geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
       const material = new THREE.PointsMaterial({
-        size: 0.035,
+        // Slightly larger dots on small screens, where the same world
+        // width maps to fewer pixels, so letterforms stay readable.
+        size: small ? 0.045 : 0.035,
         vertexColors: true,
         transparent: true,
         opacity: 0.92,
@@ -320,16 +322,25 @@ export function SwarmField({
 
       let visible = true;
       let raf = 0;
-      let pointer = { x: 999, y: 999 };
+      // The pointer the particles lean toward. It eases toward its
+      // target every frame, so switching between a real pointer and
+      // the autonomous drift never jolts the shape. It starts on the
+      // drift path, so touch screens — where no cursor ever arrives
+      // — still get motion from the first frame.
+      const pointer = { x: 0, y: 0.4 };
+      let pointerTarget = { x: 0, y: 0.4 };
+      let lastRealAt = 0;
       let currentShape = activeRef.current;
 
       const onPointer = (e: PointerEvent) => {
         const rect = host.getBoundingClientRect();
-        pointer = {
+        pointerTarget = {
           x: ((e.clientX - rect.left) / rect.width) * 2 - 1,
           y: -(((e.clientY - rect.top) / rect.height) * 2 - 1),
         };
+        lastRealAt = performance.now();
       };
+      const onPointerDown = (e: PointerEvent) => onPointer(e);
       const onResize = () => {
         const w = host.clientWidth;
         const h = Math.max(1, host.clientHeight);
@@ -351,6 +362,7 @@ export function SwarmField({
       );
       io.observe(host);
       window.addEventListener("pointermove", onPointer, { passive: true });
+      window.addEventListener("pointerdown", onPointerDown, { passive: true });
       window.addEventListener("resize", onResize);
       document.addEventListener("visibilitychange", onVisibility);
 
@@ -359,6 +371,20 @@ export function SwarmField({
         if (currentShape !== activeRef.current) {
           currentShape = activeRef.current;
         }
+        // No real pointer for 2.5s (touch screens most of the time):
+        // drift slowly across the shape on a Lissajous path so the
+        // field stays alive. A finger drag or mouse move takes over
+        // until it goes quiet again. The pointer eases toward its
+        // target, so the handover is smooth.
+        const now = performance.now();
+        if (now - lastRealAt > 2500) {
+          pointerTarget = {
+            x: Math.sin(now * 0.00021) * 0.9,
+            y: Math.cos(now * 0.00016) * 0.55,
+          };
+        }
+        pointer.x += (pointerTarget.x - pointer.x) * 0.06;
+        pointer.y += (pointerTarget.y - pointer.y) * 0.06;
         const target = targets[currentShape];
         const pos = geometry.attributes.position as import("three").BufferAttribute;
         const col = geometry.attributes.color as import("three").BufferAttribute;
@@ -414,6 +440,7 @@ export function SwarmField({
         cancelAnimationFrame(raf);
         io.disconnect();
         window.removeEventListener("pointermove", onPointer);
+        window.removeEventListener("pointerdown", onPointerDown);
         window.removeEventListener("resize", onResize);
         document.removeEventListener("visibilitychange", onVisibility);
         geometry.dispose();

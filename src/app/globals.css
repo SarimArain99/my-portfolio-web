@@ -394,6 +394,14 @@ section.roomy {
   padding: 4px 12px;
   text-overflow: clip;
 }
+/* Phones: the display-size input clips long default names (the
+   Islamic Science College example read "Islamic Science Co"). Shrink
+   it so the full default value fits the field. */
+@media (max-width: 640px) {
+  .live-input {
+    font-size: clamp(24px, 6.5vw, 32px);
+  }
+}
 .live-input:focus-visible {
   outline: 3px solid var(--color-ink);
   outline-offset: 6px;
@@ -546,7 +554,7 @@ section.roomy {
   gap: 24px;
 }
 .about-photo {
-  width: 160px;
+  width: min(240px, 100%);
 }
 .about-photo img {
   display: block;
