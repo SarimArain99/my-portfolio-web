@@ -86,10 +86,25 @@ function drawShape(
   if (shape.kind === "text") {
     const lines = shape.lines;
     let size = 150;
-    ctx.font = `900 ${size}px "Mona Sans", "Hanken Grotesk", sans-serif`;
-    const widest = Math.max(...lines.map((l) => ctx.measureText(l).width));
+    const setFont = () => {
+      ctx.font = `900 ${size}px "Mona Sans", "Hanken Grotesk", sans-serif`;
+    };
+    setFont();
+    // Word spacing: half an em between words, so "Muhammad" and
+    // "Sarim" read as two separate words instead of one long band.
+    // Words are drawn one by one so the gap is exact.
+    const wordGap = () => size * 0.5;
+    const lineWidth = (line: string) =>
+      line
+        .split(" ")
+        .reduce(
+          (acc, word, i) =>
+            acc + ctx.measureText(word).width + (i > 0 ? wordGap() : 0),
+          0,
+        );
+    const widest = Math.max(...lines.map(lineWidth));
     if (widest > w - 40) size = Math.floor((size * (w - 40)) / widest);
-    ctx.font = `900 ${size}px "Mona Sans", "Hanken Grotesk", sans-serif`;
+    setFont();
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     // Outlines only: filled 900-weight glyphs sample into a solid
@@ -98,8 +113,16 @@ function drawShape(
     // of dots rather than a faint trace.
     ctx.lineWidth = Math.max(3, size * 0.06);
     const total = lines.length * size * 0.95;
-    lines.forEach((line, i) => {
-      ctx.strokeText(line, cx, cy - total / 2 + size * 0.95 * (i + 0.5));
+    lines.forEach((line, li) => {
+      const words = line.split(" ");
+      const width = lineWidth(line);
+      let x = cx - width / 2;
+      const y = cy - total / 2 + size * 0.95 * (li + 0.5);
+      words.forEach((word) => {
+        const ww = ctx.measureText(word).width;
+        ctx.strokeText(word, x + ww / 2, y);
+        x += ww + wordGap();
+      });
     });
     return;
   }
