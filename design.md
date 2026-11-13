@@ -26,8 +26,9 @@ locks the house style so later pages inherit it instead of re-arguing it.
   bounding box. The hero wordmark is the name, in one place, always:
   it never cycles or rotates; its particles only lean gently toward
   the pointer and warm to amber near it — the pointer maps to its true
-  world position, so the reaction sits exactly under the cursor. On
-  phones the name stays one line and the camera pulls back until it
+  world position, so the reaction sits exactly under the cursor. Words
+  are drawn with a half-em gap between them, so "Muhammad" and "Sarim"
+  read as two words. On phones the name stays one line and the camera pulls back until it
   fits, so the letters are as large as the screen allows; the field
   runs live there too, driven by a small, slow drift plus finger
   drags, weak enough that the name still settles and reads. The static
