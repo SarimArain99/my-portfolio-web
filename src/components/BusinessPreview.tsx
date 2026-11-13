@@ -12,6 +12,10 @@ export function BusinessPreview() {
   const [name, setName] = useState(LIVE.placeholder);
   const [touched, setTouched] = useState(false);
   const display = name.trim() || LIVE.placeholder;
+  // The school copy is real and only fits the school. Any other
+  // business typed in gets generic preview copy, so the preview never
+  // shows a bakery being asked about admissions.
+  const isCollege = display === LIVE.placeholder;
 
   useEffect(() => {
     if (!touched) return;
@@ -71,12 +75,27 @@ export function BusinessPreview() {
         <div className="live-site">
           <p className="text-lead font-medium">{display}</p>
           <p className="mt-1 text-body">
-            Admissions, timetable, attendance.
+            {isCollege
+              ? "Admissions, timetable, attendance."
+              : "A fast website with an AI assistant that answers your customers."}
           </p>
-          <span className="live-site-btn text-small">Visit the portal</span>
+          {isCollege ? (
+            <a
+              href="https://iclp-isc-edu.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="live-site-btn text-small"
+            >
+              Visit the portal
+            </a>
+          ) : (
+            <span className="live-site-btn text-small">Visit the website</span>
+          )}
         </div>
         <p className="live-chat text-body">
-          Hi, welcome to {display}. How can I help: admissions, timetable, or attendance?
+          {isCollege
+            ? `Hi, welcome to ${display}. How can I help: admissions, timetable, or attendance?`
+            : `Hi, welcome to ${display}. How can I help you today?`}
         </p>
       </div>
 
@@ -84,13 +103,6 @@ export function BusinessPreview() {
         <button type="submit" className="btn btn-ink">
           Ask Sarim to build this
         </button>
-        <p className="flex flex-wrap gap-x-5 gap-y-2 text-body">
-          {LIVE.examples.map((ex) => (
-            <button key={ex} type="button" onClick={() => choose(ex)} className="link">
-              {ex}
-            </button>
-          ))}
-        </p>
       </div>
     </form>
   );

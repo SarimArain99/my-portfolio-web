@@ -115,7 +115,6 @@ export const LIVE = {
   heading: "What would I build for you?",
   note: "Type your business. This is the first screen and the chat greeting I would start from.",
   placeholder: "Islamic Science College",
-  examples: ["Islamic Science College"],
 };
 
 export const INDEX_ITEMS: { name: string; kind: "AI" | "Web"; href: string }[] = [
