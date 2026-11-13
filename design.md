@@ -33,7 +33,14 @@ locks the house style so later pages inherit it instead of re-arguing it.
   runs live there too, driven by a small, slow drift plus finger
   drags, weak enough that the name still settles and reads. The static
   dot poster is only for missing WebGL or reduced motion, where the
-  wordmark shows as text.
+  wordmark shows as text. The hero renders through HeroSwarm →
+  FieldCanvas → SwarmField: HeroSwarm owns the name and the demo
+  rewrite event, `src/content/site.ts` holds the wordmark,
+  `src/lib/field-math.ts` splits it into lines (one line, always),
+  and FieldCanvas adapts HeroSwarm's props onto SwarmField — the
+  colour props stay Signal Amber by design, and the sizing stays the
+  house sizing (1.4 desktop, 0.8 phone with the camera pulled back),
+  not the values passed in.
 
 ## Waived Hallmark reflex gates (on the record in `src/app/globals.css`)
 
