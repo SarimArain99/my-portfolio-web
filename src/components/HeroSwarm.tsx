@@ -17,10 +17,11 @@ const Swarm = dynamic(
  * rotation: the name stays put and stays readable. Typing a business
  * name in the live demo chapter rewrites the swarm to that name instead
  * (the field remounts on the submitted name, so its targets rebuild).
- * On phones the name stacks on two lines at a smaller scale so it fits
- * a narrow viewport — and it animates there too, driven by a slow
- * drift plus finger drags. Without WebGL the section gets
- * data-field="off" and shows the wordmark as text.
+ * On phones the name stays one line, and the camera pulls back until
+ * it fits, so the letters are as large as the screen allows — stacking
+ * it on two lines made them too small to read. It animates on phones
+ * too, driven by a slow drift plus finger drags. Without WebGL the
+ * section gets data-field="off" and shows the wordmark as text.
  */
 export function HeroSwarm({ className = "" }: { className?: string }) {
   const [text, setText] = useState("Muhammad Sarim");
@@ -39,11 +40,7 @@ export function HeroSwarm({ className = "" }: { className?: string }) {
   // there to read.
   const phone =
     typeof window !== "undefined" && window.innerWidth < 900;
-  // Phones stack the default name on two lines so it fits; a business
-  // name typed in the demo stays one line, as on desktop.
-  const lines =
-    phone && text === "Muhammad Sarim" ? ["Muhammad", "Sarim"] : [text];
-  const shapes: ShapeSpec[] = [{ kind: "text", lines }];
+  const shapes: ShapeSpec[] = [{ kind: "text", lines: [text] }];
   // The swarm canvas is full-bleed behind the hero; the focus cell (the
   // wordmark area) sits left and below the headline on desktop, centred
   // and lower on phones, so the shape is shifted into that cell.
@@ -60,7 +57,11 @@ export function HeroSwarm({ className = "" }: { className?: string }) {
         shapes={shapes}
         active={0}
         offset={offset}
-        textScale={phone ? 0.6 : 1.4}
+        textScale={phone ? 0.8 : 1.4}
+        // Phones: pull the camera back until 2.4 world units fit
+        // either side of centre, so the one-line name fits with
+        // margin at the largest readable size.
+        minHalfWidth={phone ? 2.4 : 0}
         count={{ desktop: 7000, phone: 3000 }}
         label={`${text}, written in particles`}
         onReady={(ok) => {

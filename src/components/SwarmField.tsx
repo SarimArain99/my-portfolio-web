@@ -12,17 +12,27 @@ export type ShapeSpec =
  * and spring toward their target points, so the swarm rebuilds itself
  * into a new mark whenever the active shape changes. The field never
  * rotates: the shape faces the viewer and stays in one place, and
- * particles near the pointer lean gently toward it and warm to amber
- * (fine pointers only). On touch screens there is no cursor, so the
- * pointer drifts slowly on its own and follows a finger drag instead,
- * so the field is alive on phones too. Phones use the smaller particle
- * count and the same DPR cap. Missing WebGL and reduced motion get a
- * static dot poster instead of a simulation; the parent shows its
- * text fallback.
+ * particles near the pointer lean gently toward it and warm to amber.
+ * The pointer is mapped to its TRUE world position (NDC scaled by the
+ * camera's field of view, distance and aspect), so the lean and the
+ * warmth sit exactly under the cursor — a hardcoded scale left a gap
+ * between the cursor and where the particles reacted, worst at the
+ * shape's edges. On touch screens there is no cursor, so the pointer
+ * drifts slowly on its own and follows a finger drag instead, so the
+ * field is alive on phones too — but the drift is small, slow and
+ * weak, so the shape still settles and stays readable. A caller can
+ * ask the camera to pull back until a minimum world half-width is
+ * visible (used by the hero so a long name fits a narrow phone at a
+ * readable size). Phones use the smaller particle count and the same
+ * DPR cap. Missing WebGL and reduced motion get a static dot poster
+ * instead of a simulation; the parent shows its text fallback.
  */
 
 const WORLD_W = 5.6;
 const WORLD_H = 3.8;
+// tan(27.5 deg): half the 55 deg field of view. World half-height at
+// the shape plane is TAN * cameraZ; half-width is that times aspect.
+const TAN_HALF_FOV = Math.tan((55 / 2) * (Math.PI / 180));
 
 function collectPoints(
   ctx: CanvasRenderingContext2D,
@@ -169,8 +179,8 @@ function sampleShape(
   if (shape.kind === "text") {
     // The name is the point of the hero: render it large enough to
     // read as letters, not a dense band. The scale is chosen by the
-    // caller per screen (desktop single line 1.4x; phones stack the
-    // name on two lines at 0.85x so it fits a narrow viewport).
+    // caller per screen (desktop single line 1.4x; phones single line
+    // 0.8x with the camera pulled back so it fits — see minHalfWidth).
     for (let i = 0; i < count; i++) {
       pts[i * 3] *= textScale;
       pts[i * 3 + 1] *= textScale;
@@ -187,6 +197,7 @@ export function SwarmField({
   className = "",
   offset = { x: 0, y: 0 },
   textScale = 1,
+  minHalfWidth = 0,
   onReady,
 }: {
   shapes: ShapeSpec[];
@@ -198,6 +209,9 @@ export function SwarmField({
   offset?: { x: number; y: number };
   /** World-space scale applied to text shapes only (marks stay 1). */
   textScale?: number;
+  /** Minimum visible world half-width: the camera pulls back (never
+      closer than z 7.4) until at least this much fits. 0 = no fit. */
+  minHalfWidth?: number;
   onReady?: (ok: boolean) => void;
 }) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -304,9 +318,9 @@ export function SwarmField({
       geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
       geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
       const material = new THREE.PointsMaterial({
-        // Slightly larger dots on small screens, where the same world
-        // width maps to fewer pixels, so letterforms stay readable.
-        size: small ? 0.045 : 0.035,
+        // fitCamera() below sets the real size from the camera
+        // distance; this is only the pre-fit default.
+        size: 0.035,
         vertexColors: true,
         transparent: true,
         opacity: 0.92,
@@ -319,6 +333,30 @@ export function SwarmField({
       // and stays in one place. Particles only lean toward the
       // pointer (below); their springs hold the shape.
       scene.add(group);
+
+      // Camera distance and dot size, from the host aspect. When a
+      // minimum half-width is asked for, the camera pulls back until
+      // it fits — a long name on a narrow phone stays fully visible
+      // at a readable size instead of being clipped at the edges.
+      // Dots grow with distance so they keep their screen size.
+      let camZ = 7.4;
+      let camAspect = camera.aspect;
+      const fitCamera = () => {
+        const w = host.clientWidth;
+        const h = Math.max(1, host.clientHeight);
+        camAspect = w / h;
+        let z = 7.4;
+        if (minHalfWidth > 0) {
+          z = Math.max(7.4, minHalfWidth / (TAN_HALF_FOV * camAspect));
+        }
+        camZ = z;
+        camera.aspect = camAspect;
+        camera.position.z = z;
+        camera.updateProjectionMatrix();
+        material.size = 0.035 * (z / 7.4) * (small ? 1.15 : 1);
+        renderer.setSize(w, h);
+      };
+      fitCamera();
 
       let visible = true;
       let raf = 0;
@@ -341,13 +379,7 @@ export function SwarmField({
         lastRealAt = performance.now();
       };
       const onPointerDown = (e: PointerEvent) => onPointer(e);
-      const onResize = () => {
-        const w = host.clientWidth;
-        const h = Math.max(1, host.clientHeight);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-        renderer.setSize(w, h);
-      };
+      const onResize = () => fitCamera();
       const onVisibility = () => {
         visible = !document.hidden;
         if (visible && !reduced) raf = requestAnimationFrame(tick);
@@ -375,12 +407,17 @@ export function SwarmField({
         // drift slowly across the shape on a Lissajous path so the
         // field stays alive. A finger drag or mouse move takes over
         // until it goes quiet again. The pointer eases toward its
-        // target, so the handover is smooth.
+        // target, so the handover is smooth. The drift is small and
+        // slow on purpose — a wide, fast drift kept tugging the
+        // letters apart, so the name never settled enough to read —
+        // but strong enough to be seen: too weak a drift reads as
+        // a still image.
         const now = performance.now();
-        if (now - lastRealAt > 2500) {
+        const drifting = now - lastRealAt > 2500;
+        if (drifting) {
           pointerTarget = {
-            x: Math.sin(now * 0.00021) * 0.9,
-            y: Math.cos(now * 0.00016) * 0.55,
+            x: Math.sin(now * 0.00018) * 0.7,
+            y: Math.cos(now * 0.00013) * 0.45,
           };
         }
         pointer.x += (pointerTarget.x - pointer.x) * 0.06;
@@ -390,8 +427,14 @@ export function SwarmField({
         const col = geometry.attributes.color as import("three").BufferAttribute;
         const arr = pos.array as Float32Array;
         const carr = col.array as Float32Array;
-        const px = pointer.x * 3.4;
-        const py = pointer.y * 2.2;
+        // True world position of the pointer: NDC scaled by the
+        // camera's field of view, distance and aspect. A fixed
+        // 3.4 / 2.2 scale compressed the pointer toward the centre,
+        // so the lean and the warmth appeared away from the cursor —
+        // worst at the shape's edges, which the cursor could never
+        // even reach.
+        const px = pointer.x * TAN_HALF_FOV * camZ * camAspect;
+        const py = pointer.y * TAN_HALF_FOV * camZ;
         for (let i = 0; i < n; i++) {
           const ix = i * 3;
           const k = stiffness[i];
@@ -404,17 +447,18 @@ export function SwarmField({
           // Lean toward the cursor, not away from it: a gentle pull
           // (far weaker than the springs, so the letters keep their
           // shape and the particles settle straight back when the
-          // pointer moves on). Particles near the cursor also warm
-          // to amber.
+          // pointer moves on). The drifting pointer pulls even less,
+          // so the name stays readable while the field stays alive.
+          // Particles near the cursor also warm to amber.
           if (d2 < 0.7 && d2 > 0.0001) {
             const d = Math.sqrt(d2);
-            const pull = ((1 - d) * 0.012) / d;
+            const pull = ((1 - d) * 0.012 * (drifting ? 0.7 : 1)) / d;
             velocities[ix] -= dx * pull;
             velocities[ix + 1] -= dy * pull;
           }
-          velocities[ix] *= 0.85;
-          velocities[ix + 1] *= 0.85;
-          velocities[ix + 2] *= 0.85;
+          velocities[ix] *= 0.82;
+          velocities[ix + 1] *= 0.82;
+          velocities[ix + 2] *= 0.82;
           arr[ix] += velocities[ix];
           arr[ix + 1] += velocities[ix + 1];
           arr[ix + 2] += velocities[ix + 2];
