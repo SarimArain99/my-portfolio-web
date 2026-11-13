@@ -1,58 +1,67 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
-import type { ShapeSpec } from "@/components/SwarmField";
+import { FieldCanvas } from "@/components/field-canvas";
+import { person } from "@/content/site";
+import { wordLines } from "@/lib/field-math";
 
 export const BUSINESS_EVENT = "sarim:business";
 
-const Swarm = dynamic(
-  () => import("@/components/SwarmField").then((m) => m.SwarmField),
-  { ssr: false },
-);
+interface HeroSwarmProps {
+  className?: string;
+  /** Primary accent color for the particle field (e.g., "#00E5FF", "#6366F1", or CSS var) */
+  primaryColor?: string;
+  /** Secondary highlight/ambient color */
+  secondaryColor?: string;
+}
 
-export function HeroSwarm({ className = "" }: { className?: string }) {
-  const [text, setText] = useState("Muhammad Sarim");
-  const [isPhone, setIsPhone] = useState(false);
+export function HeroSwarm({
+  className = "",
+  primaryColor = "#38bdf8", // Replace with your brand primary hex/var
+  secondaryColor = "#818cf8", // Replace with your brand secondary hex/var
+}: HeroSwarmProps) {
+  // Default fallback if person.wordmark is not set to your name
+  const defaultText = person?.wordmark || "Muhammad Sarim";
+  const [text, setText] = useState(defaultText);
   const ref = useRef<HTMLDivElement>(null);
 
-  // Responsive check that won't cause SSR/hydration mismatches
   useEffect(() => {
-    const checkPhone = () => setIsPhone(window.innerWidth < 900);
-    checkPhone();
-    window.addEventListener("resize", checkPhone);
-    return () => window.removeEventListener("resize", checkPhone);
-  }, []);
+    const on = (e: Event) =>
+      setText((e as CustomEvent<string>).detail?.trim() || defaultText);
 
-  useEffect(() => {
-    const on = (e: Event) => {
-      const name = (e as CustomEvent<string>).detail.trim();
-      setText(name || "Muhammad Sarim");
-    };
     window.addEventListener(BUSINESS_EVENT, on);
     return () => window.removeEventListener(BUSINESS_EVENT, on);
-  }, []);
+  }, [defaultText]);
 
-  // Split into separate lines if multiple words exist to prevent merging
-  const lines = text.trim().split(/\s+/);
-  const shapes: ShapeSpec[] = [{ kind: "text", lines }];
-
-  const offset = isPhone ? { x: 0, y: -0.9 } : { x: -1.3, y: -1.75 };
+  // Ensure "Muhammad" and "Sarim" sit cleanly on two lines if horizontal space is tight,
+  // or let wordLines break by word boundaries to prevent character collision.
+  const parsedLines = wordLines(text).length > 0 ? wordLines(text) : [text];
 
   return (
-    <div ref={ref} className={className}>
-      <Swarm
-        key={`${text}-${isPhone ? "phone" : "desktop"}`}
+    <div
+      ref={ref}
+      className={`relative overflow-hidden ${className}`}
+      style={
+        {
+          "--field-color-primary": primaryColor,
+          "--field-color-secondary": secondaryColor,
+        } as React.CSSProperties
+      }
+    >
+      <FieldCanvas
         className="block size-full"
-        shapes={shapes}
-        active={0}
-        offset={offset}
-        // Scaled appropriately for multi-line text
-        textScale={isPhone ? 0.75 : 1.1}
-        minHalfWidth={isPhone ? 2.2 : 0}
-        // Slightly reduced density prevents particles from blurring together
-        count={{ desktop: 4500, phone: 2400 }}
+        shape={{
+          kind: "text",
+          lines: parsedLines,
+        }}
         label={`${text}, written in particles`}
+        focus="[data-hero-focus]"
+        // Reduced from 0.78 to ~0.62: prevents character merging & overlapping glyphs
+        textScale={0.62}
+        // If your FieldCanvas supports direct color/palette props:
+        color={primaryColor}
+        secondaryColor={secondaryColor}
+        input="section"
         onReady={(ok) => {
           const section = ref.current?.closest("section");
           if (section) section.dataset.field = ok ? "on" : "off";
