@@ -11,16 +11,17 @@ const Swarm = dynamic(
 /**
  * FieldCanvas: the particle field behind a shape, built on SwarmField.
  *
- * HeroSwarm passes a few props this field deliberately does not apply
- * literally, because the house rules for this site override them:
+ * The prop names match the friend's FieldCanvas this was refactored
+ * from (shape, label, focus, textScale, input, onReady) — and like
+ * the friend's, there are no colour props: colours come from the
+ * theme, here the Signal Amber palette baked into SwarmField
+ * (cream #F5EFE6, amber #F2A33C).
  *
- * - `color` / `secondaryColor`: the dots stay Signal Amber
- *   (cream #F5EFE6, amber #F2A33C). The palette is locked in design.md;
- *   a sky-blue/indigo default would recolour the hero against it.
+ * Two house rules override the passed values:
+ *
  * - `textScale`: the field uses the sizing that renders the name
  *   clearly — 1.4 on desktop, 0.8 on phones with the camera pulled
- *   back until the line fits. The 0.62 passed in was tuned for a
- *   different field and would shrink the name.
+ *   back until the line fits.
  * - `focus`: the shape is shifted into the `[data-hero-focus]` cell
  *   with the same offset the hero used before (left and below the
  *   headline on desktop, centred and lower on phones), instead of
@@ -45,10 +46,6 @@ export function FieldCanvas({
   focus?: string;
   /** Accepted for API compatibility; the house sizing applies. */
   textScale?: number;
-  /** Accepted for API compatibility; the palette stays Signal Amber. */
-  color?: string;
-  /** Accepted for API compatibility; the palette stays Signal Amber. */
-  secondaryColor?: string;
   /** Accepted for API compatibility; the pointer is window-wide. */
   input?: string;
   onReady?: (ok: boolean) => void;

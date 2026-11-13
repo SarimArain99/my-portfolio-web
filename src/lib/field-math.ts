@@ -4,6 +4,7 @@
 // the one line fits instead. Words inside the line keep the half-em
 // gap the field draws between them.
 export function wordLines(text: string): string[] {
-  const clean = text.trim();
-  return clean ? [clean] : [];
+  const clean = text.replace(/\s+/g, " ").trim();
+  if (!clean) return [" "];
+  return [clean];
 }
